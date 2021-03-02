@@ -1,17 +1,14 @@
 package task1;
 
-import task1.model.Chessboard;
+import task1.presentation.ChessboardProgram;
 
 public class Main {
     public static void main(String... args){
 
         try{
-            int m = Integer.parseInt(args[0]);
-            int n = Integer.parseInt(args[1]);
-            Chessboard chessboard = new Chessboard(m,n);
-            chessboard.PrintDesk();
+            ChessboardProgram chessboardProgram = new ChessboardProgram(args[0],args[1]);
         }catch (Exception e){
-            Chessboard.Instruction();
+            ChessboardProgram.chessboardInstruction();
         }
 
     }
