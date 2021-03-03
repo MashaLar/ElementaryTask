@@ -4,22 +4,18 @@ import java.util.Objects;
 
 public class Rectangle {
 
-    private double biggerSide; //bigger side of rectangle
-    private double smallerSide; //smaller side of rectangle
-
-    private double diagonal; //diagonal of rectangle
+    private final double biggerSide; //bigger side of rectangle
+    private final double smallerSide; //smaller side of rectangle
 
     //constructor for rectangle
     public Rectangle(double biggerSide, double smallerSide) {
         if(biggerSide>= smallerSide) {
             this.biggerSide = biggerSide;
             this.smallerSide = smallerSide;
-            this.diagonal = getTriangleDiagonal();
         }
         else{
             this.biggerSide = smallerSide;
             this.smallerSide = biggerSide;
-            this.diagonal = getTriangleDiagonal();
         }
     }
     //constructor for special case of rectangle - square
@@ -35,17 +31,11 @@ public class Rectangle {
         return smallerSide;
     }
 
-    //getter for diagonal
-    public double getDiagonal() {
-        return diagonal;
-    }
-
     @Override
     public String toString() {
         return "Rectangle{" +
                 "side a = " + biggerSide +
                 ", side b=" + smallerSide +
-                ", diagonal=" + diagonal +
                 '}';
     }
 
@@ -64,14 +54,14 @@ public class Rectangle {
     }
 
     //method for finding value of diagonal
-    private double getTriangleDiagonal (){
+    public double calculateDiagonal (){
         return findHypotenuse(biggerSide, smallerSide);
     }
 
+    //methods for right triangles
     public static double findHypotenuse(double a, double b){
         return Math.pow(a*a+b*b,0.5);
     }
-
     public static double findCathetus(double c, double b){
         return Math.pow(c*c-b*b,0.5);
     }

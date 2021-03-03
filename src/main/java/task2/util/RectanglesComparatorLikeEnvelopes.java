@@ -28,7 +28,7 @@ public class RectanglesComparatorLikeEnvelopes implements Comparator<Rectangle> 
     }
 
     private int rectangleAtAngle(Rectangle r1, Rectangle r2){
-        double OH = Rectangle.findCathetus(r2.getDiagonal(),r1.getSmallerSide());
+        double OH = Rectangle.findCathetus(r2.calculateDiagonal(),r1.getSmallerSide());
         double HD = (r1.getBiggerSide()-OH)/2;
         double GD = Rectangle.findCathetus(r2.getSmallerSide(),HD);
         double FB = Rectangle.findCathetus(r2.getBiggerSide(), r1.getSmallerSide()-GD);
