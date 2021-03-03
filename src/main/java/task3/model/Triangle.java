@@ -1,26 +1,26 @@
-package task2.model;
+package task3.model;
 
 import java.util.Objects;
 
 public class Triangle {
 
+    //user variables
     private String name;
-    private double a;
-    private double b;
-    private double c;
-
+    private double firstSide;
+    private double secondSide;
+    private double thirdSide;
+    //calculated variables
     private double perimeter;
-    private double HalfP;
     private double square;
 
-    public Triangle(String name, double a, double b, double c) {
+    //constructor of triangle
+    public Triangle(String name, double firstSide, double secondSide, double thirdSide) {
         if(checkTriangle()) {
             this.name = name;
-            this.a = a;
-            this.b = b;
-            this.c = c;
+            this.firstSide = firstSide;
+            this.secondSide = secondSide;
+            this.thirdSide = thirdSide;
             this.perimeter = findPerimeter();
-            this.HalfP = this.perimeter / 2;
             this.square = findSquare();
         }
         else {
@@ -28,63 +28,32 @@ public class Triangle {
         }
     }
 
+    //getters for variables
     public String getName() {
         return name;
     }
-    public void setName(String name) {
-        this.name = name;
+    public double getFirstSide() {
+        return firstSide;
     }
-
-    public double getA() {
-        return a;
+    public double getSecondSide() {
+        return secondSide;
     }
-    public void setA(double a) {
-        this.a = a;
-        setPerimeter();
+    public double getThirdSide() {
+        return thirdSide;
     }
-
-    public double getB() {
-        return b;
-    }
-    public void setB(double b) {
-        this.b = b;
-        setPerimeter();
-    }
-
-    public double getC() {
-        return c;
-    }
-    public void setC(double c) {
-        this.c = c;
-        setPerimeter();
-    }
-
     public double getPerimeter() {
         return perimeter;
     }
-    public void setPerimeter() {
-        this.perimeter = findPerimeter();
-        setHalfP();
-        setSquare();
-    }
-
-    public void setHalfP() {
-        HalfP = this.perimeter/2;
-    }
-
     public double getSquare() {
         return square;
-    }
-    public void setSquare() {
-        this.square = findSquare();
     }
 
     @Override
     public String toString() {
         return  "[Triangle " + name + "]:"+
-                " a= " + a +
-                "cm, b= " + b +
-                "cm, c= " + c +
+                " a= " + firstSide +
+                "cm, b= " + secondSide +
+                "cm, c= " + thirdSide +
                 "cm, perimeter= " + perimeter +
                 "cm, square= " + square +" cm^2";
     }
@@ -94,27 +63,31 @@ public class Triangle {
         if (this == o) return true;
         if (!(o instanceof Triangle)) return false;
         Triangle triangle = (Triangle) o;
-        return Double.compare(triangle.getA(), getA()) == 0 &&
-                Double.compare(triangle.getB(), getB()) == 0 &&
-                Double.compare(triangle.getC(), getC()) == 0 &&
+        return Double.compare(triangle.getFirstSide(), getFirstSide()) == 0 &&
+                Double.compare(triangle.getSecondSide(), getSecondSide()) == 0 &&
+                Double.compare(triangle.getThirdSide(), getThirdSide()) == 0 &&
                 Objects.equals(getName(), triangle.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getA(), getB(), getC());
+        return Objects.hash(getName(), getFirstSide(), getSecondSide(), getThirdSide());
     }
 
+    //calculate perimeter of triangle
     private double findPerimeter(){
-        return a+b+c;
+        return firstSide + secondSide + thirdSide;
     }
 
+    //calculate square of triangle
     private double findSquare(){
-        return Math.pow((HalfP*(HalfP-a)*(HalfP-b)*(HalfP-c)),0.5);
+        double halfP = perimeter/2;
+        return Math.pow((halfP*(halfP- firstSide)*(halfP- secondSide)*(halfP- thirdSide)),0.5);
     }
 
+    //check sides (is it triangle?)
     private boolean checkTriangle(){
-        if (a + b > c && a + c > b && b + c > a) {
+        if (firstSide + secondSide > thirdSide && firstSide + thirdSide > secondSide && secondSide + thirdSide > firstSide) {
             return false;
         }
         return true;
