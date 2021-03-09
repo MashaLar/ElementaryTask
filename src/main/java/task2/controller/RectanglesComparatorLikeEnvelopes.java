@@ -1,4 +1,4 @@
-package task2.util;
+package task2.controller;
 
 import task2.models.Rectangle;
 
