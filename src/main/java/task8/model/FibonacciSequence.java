@@ -30,14 +30,15 @@ public class FibonacciSequence {
         fibonacci.add(S);
     }
 
-    //Fibonacci sequence by count of numbers
-    public void FibonacciNumberToLength(int lengthOfNumber) {
-        while (fibonacci.get(fibonacci.size()-1).length()<=lengthOfNumber){
+    //Fibonacci sequence by length of numbers
+    public void FibonacciNumberByLength(int lengthOfNumber) {
+        while (fibonacci.get(fibonacci.size()-1).length()<lengthOfNumber
+                || fibonacci.get(fibonacci.size()-1).length()==lengthOfNumber){
             addFibonacciNumber(calculateFibonacciNumber());
         }
     }
 
-    //Fibonacci sequence by min and max values
+    //Fibonacci sequence to max value
     public void FibonacciNumberToMax(BigInteger max) {
         while (max.compareTo(new BigInteger(fibonacci.get(fibonacci.size()-1)))>=0){
             addFibonacciNumber(calculateFibonacciNumber());
