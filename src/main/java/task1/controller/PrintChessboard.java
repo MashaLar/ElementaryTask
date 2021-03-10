@@ -1,4 +1,4 @@
-package task1.util;
+package task1.controller;
 
 import task1.model.Chessboard;
 
@@ -24,7 +24,7 @@ public class PrintChessboard {
         }
     }
 
-    //method for print one square
+    //method for get one square
     private String blackOrWhite(int i, int j){
         if(i%2==0 && j%2==0){
             return ""+black;

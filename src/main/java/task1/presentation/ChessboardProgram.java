@@ -1,7 +1,7 @@
 package task1.presentation;
 
 import task1.model.Chessboard;
-import task1.util.PrintChessboard;
+import task1.controller.PrintChessboard;
 
 public class ChessboardProgram {
 
@@ -21,7 +21,7 @@ public class ChessboardProgram {
 
     //instruction for program
     public static void chessboardInstruction(){
-        System.out.println("Please, input two natural integer numbers (from 1 to 100).\n" +
+        System.out.println("Please, input two natural integer numbers (from 1 to 99).\n" +
                 "For example:4 5\n" +
                 "The first one(m) is count of rows, the second one(n) is count of columns.\n" +
                 "This program will print chessboard size m x n. ");
@@ -37,7 +37,7 @@ public class ChessboardProgram {
 
     //method to border size and to check correct input of string
     private static int convertToInt(String S){
-        if(S.matches("\\d{1,3}")){
+        if(S.matches("\\d{1,2}")){
             return Integer.parseInt(S);
         }
         return 0;

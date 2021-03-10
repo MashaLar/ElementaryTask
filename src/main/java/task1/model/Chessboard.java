@@ -11,20 +11,14 @@ public class Chessboard {
             this.columns = columns;
     }
 
-    //getter and setter for rows
+    //getter for rows
     public int getRows() {
         return rows;
     }
-    public void setRows(int rows) {
-        this.rows = rows;
-    }
 
-    //getter and setter for columns
+    //getter for columns
     public int getColumns() {
         return columns;
-    }
-    public void setColumns(int columns) {
-        this.columns = columns;
     }
 
 }
