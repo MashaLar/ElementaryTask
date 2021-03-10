@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-public class Ticket {
+public class Ticket implements Comparable<Ticket>{
 
     private String ticket;
 
@@ -23,11 +23,16 @@ public class Ticket {
         if (!(o instanceof Ticket))
             return false;
         Ticket ticket1 = (Ticket) o;
-        return new BigInteger(ticket).equals(new BigInteger(ticket1.ticket));
+        return ticket.equals(ticket1.ticket);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(ticket);
+    }
+
+    @Override
+    public int compareTo(Ticket o) {
+        return new BigInteger(ticket).compareTo(new BigInteger(o.ticket));
     }
 }
