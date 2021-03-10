@@ -1,13 +1,10 @@
-package task2.controller;
+package task2.util;
 
 import task2.models.Rectangle;
 
-import java.util.Comparator;
+public class RectanglesComparatorLikeEnvelopes  {
 
-public class RectanglesComparatorLikeEnvelopes implements Comparator<Rectangle> {
-
-    @Override
-    public int compare(Rectangle r1, Rectangle r2) {
+    public static int compare(Rectangle r1, Rectangle r2) {
 
         if((r1.getBiggerSide()>r2.getBiggerSide() && r1.getSmallerSide()>r2.getSmallerSide()) ||
                 (r1.getBiggerSide()>r2.getBiggerSide() && r1.getSmallerSide()==r2.getSmallerSide()) ||
@@ -27,7 +24,7 @@ public class RectanglesComparatorLikeEnvelopes implements Comparator<Rectangle> 
         }
     }
 
-    private int rectangleAtAngle(Rectangle r1, Rectangle r2){
+    private static int rectangleAtAngle(Rectangle r1, Rectangle r2){
         double OH = Rectangle.findCathetus(r2.calculateDiagonal(),r1.getSmallerSide());
         double HD = (r1.getBiggerSide()-OH)/2;
         double GD = Rectangle.findCathetus(r2.getSmallerSide(),HD);
@@ -37,4 +34,5 @@ public class RectanglesComparatorLikeEnvelopes implements Comparator<Rectangle> 
         }
         else {return -1;}
     }
+
 }

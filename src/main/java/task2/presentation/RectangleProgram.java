@@ -33,7 +33,7 @@ public class RectangleProgram {
             System.out.println("second in first");
         }
         if(result == -1){
-            System.out.println("first in second");
+            System.out.println("second cant fit in first");
         }
         else {
             System.out.println("equal");
