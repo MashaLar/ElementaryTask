@@ -27,7 +27,7 @@ public class RootRow {
 
     //method for calculate and add numbers to list
     static private void findElements(int count, int square) {
-        rowOfNumbers = Stream.iterate(getRoundRoot(square), k -> k++) // stream for find and add numbers
+        rowOfNumbers = Stream.iterate(getRoundRoot(square), k -> ++k) // stream for find and add numbers
                 .limit(count)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
