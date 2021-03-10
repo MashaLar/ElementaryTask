@@ -1,7 +1,7 @@
 package task3.presentation;
 
 import task3.model.Triangle;
-import task3.util.TriangleList;
+import task3.controller.TriangleList;
 
 import java.util.Scanner;
 

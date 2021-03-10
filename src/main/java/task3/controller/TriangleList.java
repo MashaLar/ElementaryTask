@@ -1,4 +1,4 @@
-package task3.util;
+package task3.controller;
 
 import task3.model.Triangle;
 
