@@ -7,6 +7,8 @@ import java.util.stream.Stream;
 
 public class RootRow {
 
+    private RootRow(){}
+
     //method for calculate and add numbers to list
     public static List<Integer> findElements(int count, int square) {
         return Stream.iterate(getRoundRoot(square), k -> ++k) // stream for find and add numbers

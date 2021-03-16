@@ -1,14 +1,14 @@
 package task1;
 
-import task1.presentation.ChessboardProgram;
+import task1.presentation.ChessboardConsoleProgram;
 
 public class Main {
     public static void main(String... args){
 
         try{
-            ChessboardProgram chessboardProgram = new ChessboardProgram(args[0],args[1]);
+            ChessboardConsoleProgram chessboardConsoleProgram = new ChessboardConsoleProgram(args[0],args[1]);
         }catch (Exception e){
-            ChessboardProgram.chessboardInstruction();
+            ChessboardConsoleProgram.chessboardInstruction();
         }
 
     }

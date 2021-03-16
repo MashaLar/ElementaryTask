@@ -2,7 +2,7 @@ package task1.controller;
 
 import task1.model.Chessboard;
 
-public class PrintChessboard {
+public class ConsoleChessboard {
 
     //symbols for squares
     final private char white= '\u25A0'; // symbol of white square
@@ -10,18 +10,20 @@ public class PrintChessboard {
 
     private Chessboard chessboard;
 
-    public PrintChessboard(Chessboard chessboard){
+    public ConsoleChessboard(Chessboard chessboard){
         this.chessboard = chessboard;
     }
 
     //method for print chessboard
-    public void PrintDesk(){
+    public String CreateDesk(){
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < chessboard.getRows(); i++) {
             for (int j = 0; j < chessboard.getColumns(); j++) {
-                System.out.print(blackOrWhite(i,j));
+               result.append(blackOrWhite(i,j));
             }
-            System.out.print("\n");
+            result.append("\n");
         }
+        return result.toString();
     }
 
     //method for get one square
