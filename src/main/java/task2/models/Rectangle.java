@@ -55,14 +55,7 @@ public class Rectangle {
 
     //method for finding value of diagonal
     public double calculateDiagonal (){
-        return findHypotenuse(biggerSide, smallerSide);
+        return Math.pow(biggerSide*biggerSide+smallerSide*smallerSide, 0.5);
     }
 
-    //methods for right triangles
-    public static double findHypotenuse(double a, double b){
-        return Math.pow(a*a+b*b,0.5);
-    }
-    public static double findCathetus(double c, double b){
-        return Math.pow(c*c-b*b,0.5);
-    }
 }

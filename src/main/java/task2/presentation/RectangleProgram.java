@@ -8,18 +8,12 @@ public class RectangleProgram {
 
     private static final String FIRST_SIDE = "Input first side";
     private static final String SECOND_SIDE = "Input second side";
+    private static final String INSTRUCTION = "Some Instructions";
 
     private final Scanner in = new Scanner(System.in);
 
-    private Rectangle firstRectangle;
-    private Rectangle secondRectangle;
-
     public RectangleProgram(){
 
-    }
-
-    public static void Instruction(){
-        System.out.println("Some Instructions");
     }
 
     private void createRectangle(){

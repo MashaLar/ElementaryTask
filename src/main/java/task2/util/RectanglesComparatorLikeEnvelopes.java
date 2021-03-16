@@ -8,31 +8,17 @@ public class RectanglesComparatorLikeEnvelopes  {
 
         if((r1.getBiggerSide()>r2.getBiggerSide() && r1.getSmallerSide()>r2.getSmallerSide()) ||
                 (r1.getBiggerSide()>r2.getBiggerSide() && r1.getSmallerSide()==r2.getSmallerSide()) ||
-                (r1.getBiggerSide()==r2.getBiggerSide() && r1.getSmallerSide()>r2.getSmallerSide())){
+                (r1.getBiggerSide()==r2.getBiggerSide() && r1.getSmallerSide()>r2.getSmallerSide())||
+                (r1.calculateDiagonal()>= r2.getSmallerSide()+r2.getBiggerSide())){
             return 1;
-        }
-        else if((r1.getBiggerSide()<r2.getBiggerSide() && r1.getSmallerSide()<r2.getSmallerSide()) ||
-                (r1.getBiggerSide()<r2.getBiggerSide() && r1.getSmallerSide()==r2.getSmallerSide()) ||
-                (r1.getBiggerSide()==r2.getBiggerSide() && r1.getSmallerSide()<r2.getSmallerSide())){
-            return -1;
         }
         else if(r1.getBiggerSide()==r2.getBiggerSide() && r1.getSmallerSide()==r2.getSmallerSide()){
             return 0;
         }
-        else{
-            return rectangleAtAngle(r1,r2);
+        else {
+            return -1;
         }
     }
 
-    private static int rectangleAtAngle(Rectangle r1, Rectangle r2){
-        double OH = Rectangle.findCathetus(r2.calculateDiagonal(),r1.getSmallerSide());
-        double HD = (r1.getBiggerSide()-OH)/2;
-        double GD = Rectangle.findCathetus(r2.getSmallerSide(),HD);
-        double FB = Rectangle.findCathetus(r2.getBiggerSide(), r1.getSmallerSide()-GD);
-        if( FB + HD <= r1.getBiggerSide() ){
-            return 1;
-        }
-        else {return -1;}
-    }
 
 }
