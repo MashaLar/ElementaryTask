@@ -12,8 +12,16 @@ public class Ticket implements Comparable<Ticket>{
         this.ticket = ticket;
     }
 
+    public String getTicket(){
+        return ticket;
+    }
+
     public int[] getIntArrayFromString(){
         return Stream.of(ticket.split("")).mapToInt(Integer::parseInt).toArray();
+    }
+
+    public String addNumToTicket(int number){
+        return new BigInteger(ticket).add(BigInteger.valueOf(number)).toString();
     }
 
     @Override
@@ -35,4 +43,7 @@ public class Ticket implements Comparable<Ticket>{
     public int compareTo(Ticket o) {
         return new BigInteger(ticket).compareTo(new BigInteger(o.ticket));
     }
+
+
+
 }

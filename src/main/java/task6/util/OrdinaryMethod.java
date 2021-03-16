@@ -3,7 +3,7 @@ import task6.model.Ticket;
 
 public class OrdinaryMethod {
 
-    public boolean sumOfPositionEvenOddNums(Ticket ticket) {
+    public static boolean sumOfPositionEvenOddNums(Ticket ticket) {
         int[] numbers = ticket.getIntArrayFromString();
         int[] sum = {0, 0};
         for (int i = 0; i < numbers.length; i++) {
