@@ -1,9 +1,9 @@
 package task4.model;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class ReaderFile {
 
@@ -13,14 +13,22 @@ public class ReaderFile {
         fileStream = new FileReader(path);
     }
 
-    public String readFile() {
-        String S = "";
-        try(BufferedReader buf = new BufferedReader(fileStream)){
-            S = buf.readLine();
-        }catch (IOException e){
-            System.out.println(e);
+    public StringBuilder readFile() {
+        StringBuilder S = new StringBuilder();
+        Scanner sc = new Scanner(fileStream);
+        while (sc.hasNext()) {
+            S.append(sc.nextLine());
         }
         return S;
+    }
+
+    public int countOfRegex(String word){
+        int i = 0;
+        String s = readFile().toString();
+        if(s.matches(".*"+word+".*")) {
+            i = s.split(".*"+word+".*").length + 1;
+        }
+        return i;
     }
 
     public void closeFile() {
