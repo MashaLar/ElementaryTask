@@ -14,9 +14,9 @@ public class RootRow {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    //method for finding rounded root from minimal border for sequence of natural numbers
-     private static int getRoundRoot(int square){
-        return (int) Math.round(Math.pow(square, 0.5));
+    //method for finding rounded root. If square less than 0, than back -1
+    public static int getRoundRoot(int square){
+            return (int) Math.round(Math.pow(square, 0.5));
     }
 
 }
