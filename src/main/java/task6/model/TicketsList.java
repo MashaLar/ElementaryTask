@@ -15,8 +15,8 @@ public class TicketsList {
         tickets = new ArrayList<>();
         tickets.add(new Ticket(start));
         Ticket endTicket = new Ticket(end);
-                while (tickets.get(tickets.size()).compareTo(endTicket)!=0){
-            tickets.add(new Ticket(tickets.get(tickets.size()).addNumToTicket(1)));
+        while (tickets.get(tickets.size()-1).compareTo(endTicket)!=0){
+            tickets.add(new Ticket(tickets.get(tickets.size()-1).addNumToTicket(1)));
         }
     }
 
