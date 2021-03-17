@@ -50,7 +50,7 @@ public class RectangleConsoleProgram extends ConsoleApp {
                         RectanglesComparatorLikeEnvelopes.compare(rectangle2, rectangle1));
     }
 
-    private boolean checkNumber(double number){ return number != 0.0; }
+    private boolean checkNumber(double number){ return number != 0.0 && number<=1000; }
 
     private double[] getSides() {
         double[] rectanglesSides = {0, 0};
@@ -58,7 +58,7 @@ public class RectangleConsoleProgram extends ConsoleApp {
             rectanglesSides[0] = StringConverter.StringToDouble(inputDataFiltered(FIRST_SIDE));
             if (checkNumber(rectanglesSides[0])) {
                 rectanglesSides[1] = StringConverter.StringToDouble(inputDataFiltered(SECOND_SIDE));
-                if (checkNumber(rectanglesSides[0])) {
+                if (checkNumber(rectanglesSides[1])) {
                     return rectanglesSides;
                 }
                 showData(INSTRUCTION);
@@ -81,20 +81,21 @@ public class RectangleConsoleProgram extends ConsoleApp {
 
     @Override
     public ConsoleApp run(boolean commonFlag) {
-        anchor:
+        boolean closeFlag = false;
         do{
             showData(menu(commonFlag));
             int i = StringConverter.StringToInt(inputDataFiltered("Your choice:"));
             switch (i) {
                 case 1:
                     startRectangleConsoleProgram();
-                    continue anchor;
+                    continue;
                 case 2:
+                    closeFlag = close();
                     break;
                 default:
                     showData(ConsoleApp.INSTRUCTION);
             }
-        }while(!close());
+        }while(!closeFlag);
         if(commonFlag) return new ConsoleProgram();
         else return null;
     }

@@ -1,5 +1,7 @@
 package task3.model;
 
+import task3.exception.NotExistTriangle;
+
 import java.util.Objects;
 
 public class Triangle {
@@ -15,7 +17,7 @@ public class Triangle {
 
     //constructor of triangle
     public Triangle(String name, double firstSide, double secondSide, double thirdSide) {
-        if(checkTriangle()) {
+        if(checkTriangle(firstSide, secondSide, thirdSide)) {
             this.name = name;
             this.firstSide = firstSide;
             this.secondSide = secondSide;
@@ -23,9 +25,7 @@ public class Triangle {
             this.perimeter = findPerimeter();
             this.square = findSquare();
         }
-        else {
-            System.out.println("--Wrong sides!--");
-        }
+        else throw new NotExistTriangle();
     }
 
     //getters for variables
@@ -48,14 +48,28 @@ public class Triangle {
         return square;
     }
 
+    //calculate perimeter of triangle
+    private double findPerimeter(){
+        return firstSide + secondSide + thirdSide;
+    }
+
+    //calculate square of triangle
+    private double findSquare(){
+        double halfP = perimeter/2;
+        return Math.pow((halfP*(halfP- firstSide)*(halfP- secondSide)*(halfP- thirdSide)),0.5);
+    }
+
+    //check sides (is it triangle?)
+    private boolean checkTriangle(double firstSide, double secondSide, double thirdSide){
+        return firstSide + secondSide >= thirdSide &&
+                firstSide + thirdSide >= secondSide &&
+                secondSide + thirdSide >= firstSide;
+    }
+
     @Override
     public String toString() {
-        return  "[Triangle " + name + "]:"+
-                " a= " + firstSide +
-                "cm, b= " + secondSide +
-                "cm, c= " + thirdSide +
-                "cm, perimeter= " + perimeter +
-                "cm, square= " + square +" cm^2";
+        return  "[Triangle " + name +"]:"+
+                "square= " + square + "c.u.^2";
     }
 
     @Override
@@ -74,23 +88,6 @@ public class Triangle {
         return Objects.hash(getName(), getFirstSide(), getSecondSide(), getThirdSide());
     }
 
-    //calculate perimeter of triangle
-    private double findPerimeter(){
-        return firstSide + secondSide + thirdSide;
-    }
 
-    //calculate square of triangle
-    private double findSquare(){
-        double halfP = perimeter/2;
-        return Math.pow((halfP*(halfP- firstSide)*(halfP- secondSide)*(halfP- thirdSide)),0.5);
-    }
-
-    //check sides (is it triangle?)
-    private boolean checkTriangle(){
-        if (firstSide + secondSide > thirdSide && firstSide + thirdSide > secondSide && secondSide + thirdSide > firstSide) {
-            return false;
-        }
-        return true;
-    }
 
 }

@@ -18,7 +18,7 @@ public class RootRow {
 
     //method for finding rounded root. If square less than 0, than back -1
     public static int getRoundRoot(int square){
-            return (int) Math.round(Math.pow(square, 0.5));
+            return (int) Math.ceil(Math.pow(square, 0.5));
     }
 
 }

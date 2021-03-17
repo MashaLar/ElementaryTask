@@ -11,12 +11,12 @@ public class TriangleList {
     private ArrayList<Triangle> triangleList;
 
     //constructor of list
-    public TriangleList(Triangle... triangles){
+    public TriangleList(Triangle... triangles) {
         triangleList = new ArrayList<>();
         Collections.addAll(triangleList, triangles);
     }
 
-    public ArrayList<Triangle> getTriangleList(){
+    public ArrayList<Triangle> getTriangleList() {
         return triangleList;
     }
 
@@ -29,19 +29,19 @@ public class TriangleList {
     };
 
     //method to add new triangle to list
-    public void addTriangle(Triangle triangle) {
-        triangleList.add(triangle);
+    public boolean addTriangle(Triangle triangle) {
+        return triangleList.add(triangle);
     }
 
     //method to delete triangle by name
-    public void removeTriangle(String name) {
-        triangleList.remove(findByName(name));
+    public boolean removeTriangle(String name) {
+        return triangleList.remove(findByName(name));
     }
 
     //method to search triangle by name
-    public Triangle findByName(String name){
+    public Triangle findByName(String name) {
         for (Triangle triangle : triangleList) {
-            if(triangle.getName().equals(name)){
+            if (triangle.getName().equals(name)) {
                 return triangle;
             }
         }
@@ -49,8 +49,19 @@ public class TriangleList {
     }
 
     //method to sort list (descending)
-    public void sortBySquare(){
+    public void sortBySquare() {
         triangleList.sort(TriangleComparatorBySquare);
     }
 
+    @Override
+    public String toString() {
+        sortBySquare();
+        StringBuilder result = new StringBuilder();
+        result.append("============= Triangles list: ===============\n");
+        int i = 1;
+        for (Triangle triangle : triangleList) {
+            result.append("" + (i++) + "." + triangle.toString() + "\n");
+        }
+        return result.toString();
+    }
 }

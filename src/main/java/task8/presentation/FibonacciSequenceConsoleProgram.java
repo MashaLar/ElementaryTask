@@ -75,23 +75,24 @@ public class FibonacciSequenceConsoleProgram extends ConsoleApp {
 
     @Override
     public ConsoleApp run(boolean commonFlag) {
-        anchor:
+        boolean closeFlag = false;
         do{
             showData(menu(commonFlag));
             int i = StringConverter.StringToInt(inputDataFiltered("Your choice:"));
             switch (i) {
                 case 1:
                     startFibonacciSequenceLength();
-                    continue anchor;
+                    continue;
                 case 2:
                     startFibonacciSequenceInterval();
-                    continue anchor;
+                    continue;
                 case 3:
+                    closeFlag = close();
                     break;
                 default:
                     showData(ConsoleApp.INSTRUCTION);
             }
-        }while(!close());
+        }while(!closeFlag);
         if(commonFlag) return new ConsoleProgram();
         else return null;
     }

@@ -3,6 +3,7 @@ package general.models;
 import general.converter.StringConverter;
 import task1.presentation.ChessboardConsoleProgram;
 import task2.presentation.RectangleConsoleProgram;
+import task3.presentation.TriangleConsoleProgram;
 import task7.presentation.RootRowConsoleProgram;
 import task8.presentation.FibonacciSequenceConsoleProgram;
 
@@ -28,7 +29,7 @@ public class ConsoleProgram extends ConsoleApp{
 
     @Override
     public ConsoleApp run(boolean commonFlag) {
-        anchor:
+        boolean closeFlag = false;
         do{
             showData(menu());
             int i = StringConverter.StringToInt(inputDataFiltered("Your choice:"));
@@ -38,7 +39,7 @@ public class ConsoleProgram extends ConsoleApp{
                 case 2:
                     return new RectangleConsoleProgram(commonFlag);
                 case 3:
-                    break;
+                    return new TriangleConsoleProgram(commonFlag);
                 case 4:
                     break;
                 case 5:
@@ -52,11 +53,12 @@ public class ConsoleProgram extends ConsoleApp{
                 case 9:
                     break;
                 case 10:
+                    closeFlag = close();
                     break;
                 default:
                     showData(ConsoleApp.INSTRUCTION);
             }
-        }while(!close());
+        }while(!closeFlag);
         return null;
     }
 

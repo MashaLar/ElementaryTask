@@ -54,21 +54,21 @@ public class ChessboardConsoleProgram extends ConsoleApp {
 
     @Override
     public ConsoleApp run(boolean commonFlag) {
-        anchor:
+        boolean closeFlag = false;
         do{
             showData(menu(commonFlag));
             int i = StringConverter.StringToInt(inputDataFiltered("Your choice:"));
             switch (i) {
                 case 1:
                     startChessboardConsoleProgram();
-                    continue anchor;
+                    continue;
                 case 2:
-
+                    closeFlag = close();
                     break;
                 default:
                     showData(ConsoleApp.INSTRUCTION);
             }
-        }while(!close());
+        }while(!closeFlag);
         if(commonFlag) return new ConsoleProgram();
         else return null;
     }

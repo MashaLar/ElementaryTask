@@ -1,7 +1,8 @@
 package general.models;
 
-public abstract class Application {
-    public abstract String inputDataFiltered(String someMessage);
-    public abstract String inputData(String someMessage);
-    public abstract void showData(String someData);
+public interface Application {
+    String inputDataFiltered(String someMessage);
+    String inputData(String someMessage);
+    void showData(String someData);
+    void showWarning(String someData);
 }

@@ -9,7 +9,7 @@ public class StringValidator {
         return S.matches("-?\\d{1,9}");
     }
     public static boolean isDouble(String S){
-        return S.matches("-?\\d{1,9}\\.?\\d{1,9}");
+        return S.matches("-?\\d{0,9}\\.?\\d{1,9}");
     }
 
 }

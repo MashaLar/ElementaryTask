@@ -4,11 +4,12 @@ import general.converter.StringConverter;
 
 import java.util.Scanner;
 
-public abstract class ConsoleApp extends Application{
+public abstract class ConsoleApp implements Application {
 
     protected static final String INSTRUCTION = "\n--------?Instruction?-------\n" +
             "Input number according to chosen action.\n" +
             "EXAMPLE. Input: 1. Output: started one of actions";
+
     private final Scanner scanner = new Scanner(System.in);
 
     @Override
@@ -26,6 +27,11 @@ public abstract class ConsoleApp extends Application{
     public String inputData(String someMessage) {
         System.out.println(someMessage);
         return scanner.nextLine();
+    }
+
+    @Override
+    public void showWarning(String someMessage) {
+        System.err.println(someMessage);
     }
 
     public boolean hasNext(String pattern){
@@ -49,6 +55,4 @@ public abstract class ConsoleApp extends Application{
     }
 
     public abstract ConsoleApp run(boolean commonFlag);
-
-
 }
