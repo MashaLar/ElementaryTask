@@ -12,7 +12,7 @@ public class FibonacciSequenceConsoleProgram extends ConsoleApp {
 
     private static final String NAME_PROGRAM = "Fibonacci sequence program";
     private static final String INSTRUCTION = "\n--------?Instruction?-------\n" +
-            "This program need one or two numbers. If you input one number (from 1 to 99),\n" +
+            "This program need one or two integer numbers. If you input one number (from 1 to 99),\n" +
             "than program will print numbers which lengths equals it.\n" +
             "If you input two numbers (from 0 to number which contains 99 numerals).\n" +
             "EXAMPLE. Input: 1. Output: [0, 1, 1, 2, 3, 5, 8].\n" +

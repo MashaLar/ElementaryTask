@@ -9,7 +9,7 @@ public class RootRowConsoleProgram extends ConsoleApp {
 
     private static final String NAME_PROGRAM = "RootRow program";
     private static final String INSTRUCTION = "\n--------?Instruction?-------\n" +
-            "This program need two numbers. First one is count of numbers in row (from 1 to 999),\n" +
+            "This program need two numbers integer. First one is count of numbers in row (from 1 to 999),\n" +
             "second one is square of number that less than first element of row (from 1 to 999 999).\n" +
             "EXAMPLE. Input: 4 9. Output: [3, 4, 5, 6].\n";
     private static final String[] COMMON_MENU = {

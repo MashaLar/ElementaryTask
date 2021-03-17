@@ -2,6 +2,7 @@ package general.models;
 
 import general.converter.StringConverter;
 import task1.presentation.ChessboardConsoleProgram;
+import task2.presentation.RectangleConsoleProgram;
 import task7.presentation.RootRowConsoleProgram;
 import task8.presentation.FibonacciSequenceConsoleProgram;
 
@@ -35,7 +36,7 @@ public class ConsoleProgram extends ConsoleApp{
                 case 1:
                     return new ChessboardConsoleProgram(commonFlag);
                 case 2:
-                    return new RootRowConsoleProgram(commonFlag);
+                    return new RectangleConsoleProgram(commonFlag);
                 case 3:
                     break;
                 case 4:
@@ -45,9 +46,9 @@ public class ConsoleProgram extends ConsoleApp{
                 case 6:
                     break;
                 case 7:
-                    return new FibonacciSequenceConsoleProgram(commonFlag);
+                    return new RootRowConsoleProgram(commonFlag);
                 case 8:
-                    break;
+                    return new FibonacciSequenceConsoleProgram(commonFlag);
                 case 9:
                     break;
                 case 10:

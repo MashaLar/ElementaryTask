@@ -10,7 +10,7 @@ public class ChessboardConsoleProgram extends ConsoleApp {
 
     private static final String NAME_PROGRAM = "Chessboard program";
     private static final String INSTRUCTION = "\n--------?Instruction?-------\n" +
-            "This program need two numbers(from 1 to 99). First one is count of rows,\n" +
+            "This program need two integer numbers(from 1 to 99). First one is count of rows,\n" +
             "second one is count of columns.\n" +
             "EXAMPLE. Input: 2 2. Output:\n \u25A0 \u25A1 \n \u25A0 \u25A1.\n";
     private static final String[] COMMON_MENU = {
