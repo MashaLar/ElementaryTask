@@ -7,4 +7,4 @@
 target/
 *.iml
 /.m2
-/src/test
+/src/test/
