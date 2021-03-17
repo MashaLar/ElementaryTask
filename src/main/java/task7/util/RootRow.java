@@ -16,7 +16,7 @@ public class RootRow {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    //method for finding rounded root. If square less than 0, than back -1
+    //method for finding rounded root. If square less than 0, than back 0
     public static int getRoundRoot(int square){
             return (int) Math.ceil(Math.pow(square, 0.5));
     }

@@ -3,6 +3,7 @@ package task1.presentation;
 import general.converter.StringConverter;
 import general.models.ConsoleApp;
 import general.models.ConsoleProgram;
+import task1.exception.NoSuchChessboardException;
 import task1.model.Chessboard;
 import task1.controller.ConsoleChessboard;
 
@@ -34,8 +35,12 @@ public class ChessboardConsoleProgram extends ConsoleApp {
         if (checkNumber(m)) {
             int n = convertToInt(inputDataFiltered(COLUMNS));
             if (checkNumber(n)) {
-                ConsoleChessboard consoleChessboard = new ConsoleChessboard(new Chessboard(m, n));
-                showData(consoleChessboard.CreateDesk());
+                try {
+                    ConsoleChessboard consoleChessboard = new ConsoleChessboard(new Chessboard(m, n));
+                    showData(consoleChessboard.CreateDesk());
+                }catch (NoSuchChessboardException ex){
+
+                }
             }
         }
         else showData(INSTRUCTION);
@@ -46,7 +51,7 @@ public class ChessboardConsoleProgram extends ConsoleApp {
 
     //method to border size and to check correct input of string
     private static int convertToInt(String S){
-        if(S.matches("\\d{1,2}")){
+        if(S.matches("[2-9]\\d{0,1}|\\d{2}")){
             return StringConverter.StringToInt(S);
         }
         return 0;
