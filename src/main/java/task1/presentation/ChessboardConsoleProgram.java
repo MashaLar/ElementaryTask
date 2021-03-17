@@ -13,32 +13,36 @@ public class ChessboardConsoleProgram extends ConsoleApp {
             "This program need two numbers(from 1 to 99). First one is count of rows,\n" +
             "second one is count of columns.\n" +
             "EXAMPLE. Input: 2 2. Output:\n \u25A0 \u25A1 \n \u25A0 \u25A1.\n";
-    private static final String[] MENU = {
+    private static final String[] COMMON_MENU = {
             "print new chessboard",
             "back to task menu"
+    };
+    private static final String[] MENU = {
+            "print new chessboard",
+            "exit"
     };
     private static final String ROWS = "\nInput count of rows:";
     private static final String COLUMNS = "\nInput count of columns:";
 
     //constructor
-    public ChessboardConsoleProgram(){
-        run();
+    public ChessboardConsoleProgram(boolean commonFlag){
+        run(commonFlag);
     }
 
     private void startChessboardConsoleProgram(){
         int m = convertToInt(inputDataFiltered(ROWS));
-        int n = convertToInt(inputDataFiltered(COLUMNS));
-        if (checkNumber(m, n)) {
-            ConsoleChessboard consoleChessboard = new ConsoleChessboard(new Chessboard(m,n));
-            showData(consoleChessboard.CreateDesk());
+        if (checkNumber(m)) {
+            int n = convertToInt(inputDataFiltered(COLUMNS));
+            if (checkNumber(n)) {
+                ConsoleChessboard consoleChessboard = new ConsoleChessboard(new Chessboard(m, n));
+                showData(consoleChessboard.CreateDesk());
+            }
         }
         else showData(INSTRUCTION);
     }
 
     //method to check correct input
-    private boolean checkNumber(int rows, int columns){
-        return rows == 0 || columns == 0;
-    }
+    private boolean checkNumber(int number){ return number != 0; }
 
     //method to border size and to check correct input of string
     private static int convertToInt(String S){
@@ -49,25 +53,28 @@ public class ChessboardConsoleProgram extends ConsoleApp {
     }
 
     @Override
-    public ConsoleApp run() {
+    public ConsoleApp run(boolean commonFlag) {
         anchor:
         do{
-            showData(menu());
-            int i = StringConverter.StringToInt(inputDataFiltered("Your choice:\n"));
+            showData(menu(commonFlag));
+            int i = StringConverter.StringToInt(inputDataFiltered("Your choice:"));
             switch (i) {
                 case 1:
                     startChessboardConsoleProgram();
                     continue anchor;
                 case 2:
+
                     break;
                 default:
                     showData(ConsoleApp.INSTRUCTION);
             }
         }while(!close());
-        return new ConsoleProgram();
+        if(commonFlag) return new ConsoleProgram();
+        else return null;
     }
 
-    private String menu(){
+    private String menu(boolean commonFlag){
+        if(commonFlag) return menu(NAME_PROGRAM,COMMON_MENU);
         return menu(NAME_PROGRAM,MENU);
     }
 }

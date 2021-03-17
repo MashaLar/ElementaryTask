@@ -22,20 +22,20 @@ public class ConsoleProgram extends ConsoleApp{
     };
 
     public ConsoleProgram(){
-        run();
+        run(true);
     }
 
     @Override
-    public ConsoleApp run() {
+    public ConsoleApp run(boolean commonFlag) {
         anchor:
         do{
             showData(menu());
-            int i = StringConverter.StringToInt(inputDataFiltered("Your choice:\n"));
+            int i = StringConverter.StringToInt(inputDataFiltered("Your choice:"));
             switch (i) {
                 case 1:
-                    return new ChessboardConsoleProgram();
+                    return new ChessboardConsoleProgram(commonFlag);
                 case 2:
-                    return new RootRowConsoleProgram();
+                    return new RootRowConsoleProgram(commonFlag);
                 case 3:
                     break;
                 case 4:
@@ -45,7 +45,7 @@ public class ConsoleProgram extends ConsoleApp{
                 case 6:
                     break;
                 case 7:
-                    return new FibonacciSequenceConsoleProgram();
+                    return new FibonacciSequenceConsoleProgram(commonFlag);
                 case 8:
                     break;
                 case 9:
@@ -54,7 +54,6 @@ public class ConsoleProgram extends ConsoleApp{
                     break;
                 default:
                     showData(ConsoleApp.INSTRUCTION);
-                    continue anchor;
             }
         }while(!close());
         return null;

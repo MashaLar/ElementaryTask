@@ -35,9 +35,9 @@ public abstract class ConsoleApp extends Application{
     public String menu(String nameOfProgram, String... menuPoints){
         StringBuilder menu = new StringBuilder();
         menu.append("\n=========This is "+nameOfProgram+"========\n" +
-                "Chose what you want to do:\n");
+                "Chose what you want to do:");
         for (int i =0; i< menuPoints.length;i++) {
-            menu.append("\n"+i+1+")"+menuPoints[i]);
+            menu.append("\n"+(i+1)+")"+menuPoints[i]);
         }
         return menu.toString();
     }
@@ -48,7 +48,7 @@ public abstract class ConsoleApp extends Application{
                         .matches("y");
     }
 
-    public abstract ConsoleApp run();
+    public abstract ConsoleApp run(boolean commonFlag);
 
 
 }

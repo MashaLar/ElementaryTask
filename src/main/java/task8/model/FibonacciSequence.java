@@ -33,7 +33,7 @@ public class FibonacciSequence {
 
     //Fibonacci sequence by length of numbers
     public void calculateFibonacciNumberByLength(int lengthOfNumber) {
-        fibonacci = Arrays.asList("0", "1");
+        fibonacci = new ArrayList<>(Arrays.asList("0", "1"));
         while (fibonacci.get(fibonacci.size()-1).length()<=lengthOfNumber){
             addFibonacciNumber(calculateFibonacciNumber());
         }
@@ -41,7 +41,7 @@ public class FibonacciSequence {
 
     //Fibonacci sequence to max value
     public void calculateFibonacciNumberToMax(BigInteger max) {
-        fibonacci = Arrays.asList("0", "1");
+        fibonacci =  new ArrayList<>(Arrays.asList("0", "1"));
         while (max.compareTo(new BigInteger(fibonacci.get(fibonacci.size()-1)))>=0){
             addFibonacciNumber(calculateFibonacciNumber());
         }

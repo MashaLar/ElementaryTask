@@ -23,12 +23,8 @@ public class RootRowConsoleProgram extends ConsoleApp {
     private static final String INPUT_COUNT_OF_NUMBERS = "\nInput count of numbers in row:";
     private static final String INPUT_SQUARE_NUMBER = "\nInput square number:";
 
-    public RootRowConsoleProgram(){
-        run();
-    }
     public RootRowConsoleProgram(boolean commonFlag){
-        if(commonFlag) run();
-        run();
+        run(commonFlag);
     }
 
     public void startRootRowConsoleProgram(){
@@ -41,8 +37,8 @@ public class RootRowConsoleProgram extends ConsoleApp {
     }
 
     //method to check correct input
-    private boolean checkNumber(int rows, int columns){
-        return rows == 0 || columns == 0;
+    private boolean checkNumber(int count, int square){
+        return count != 0 && square != 0;
     }
 
     //method to border size and to check correct input of string
@@ -60,11 +56,11 @@ public class RootRowConsoleProgram extends ConsoleApp {
     }
 
     @Override
-    public ConsoleApp run(){
+    public ConsoleApp run(boolean commonFlag){
         anchor:
         do{
-            showData(menu());
-            int i = StringConverter.StringToInt(inputDataFiltered("Your choice:\n"));
+            showData(menu(commonFlag));
+            int i = StringConverter.StringToInt(inputDataFiltered("Your choice:"));
             switch (i) {
                 case 1:
                     startRootRowConsoleProgram();
@@ -75,12 +71,15 @@ public class RootRowConsoleProgram extends ConsoleApp {
                     showData(ConsoleApp.INSTRUCTION);
             }
         }while(!close());
-        return new ConsoleProgram();
+        if(commonFlag) return new ConsoleProgram();
+        else return null;
     }
 
-    private String menu(){
+    private String menu(boolean commonFlag){
+        if(commonFlag) return menu(NAME_PROGRAM,COMMON_MENU);
         return menu(NAME_PROGRAM,MENU);
     }
+
 
 
 }

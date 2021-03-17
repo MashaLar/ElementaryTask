@@ -16,7 +16,7 @@ public class ConsoleChessboard {
 
     //method for print chessboard
     public String CreateDesk(){
-        StringBuilder result = new StringBuilder();
+        StringBuilder result = new StringBuilder("\n-----Chessboard-----\n");
         for (int i = 0; i < chessboard.getRows(); i++) {
             for (int j = 0; j < chessboard.getColumns(); j++) {
                result.append(blackOrWhite(i,j));

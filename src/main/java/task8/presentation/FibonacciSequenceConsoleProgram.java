@@ -17,10 +17,15 @@ public class FibonacciSequenceConsoleProgram extends ConsoleApp {
             "If you input two numbers (from 0 to number which contains 99 numerals).\n" +
             "EXAMPLE. Input: 1. Output: [0, 1, 1, 2, 3, 5, 8].\n" +
             "Input: 1 100. Output: [1, 1, 2, 3, 5, 8, 13, 21, 33, 54, 87].";
-    private static final String[] MENU = {
+    private static final String[] COMMON_MENU = {
             "print numbers of sequence which lengths equals yours",
             "print numbers of sequence in given interval",
             "back to task menu"
+    };
+    private static final String[] MENU = {
+            "print numbers of sequence which lengths equals yours",
+            "print numbers of sequence in given interval",
+            "exit"
     };
     private static final String LENGTH_NUM = "\nInput length of number in sequence:";
     private static final String MIN_VALUE = "\nInput minimal number of sequence:";
@@ -28,8 +33,8 @@ public class FibonacciSequenceConsoleProgram extends ConsoleApp {
 
 
     //constructor
-    public FibonacciSequenceConsoleProgram(){
-        run();
+    public FibonacciSequenceConsoleProgram(boolean commonFlag){
+        run(commonFlag);
     }
 
     private void startFibonacciSequenceLength(){
@@ -37,7 +42,7 @@ public class FibonacciSequenceConsoleProgram extends ConsoleApp {
         if (checkNumbersLength(length)) {
             FibonacciSequence fibonacciSequence = new FibonacciSequence();
             fibonacciSequence.calculateFibonacciNumberByLength(length);
-            fibonacciSequence.getFibonacci().removeIf(s -> s.length()!=length); // TODO: check
+            fibonacciSequence.getFibonacci().removeIf(s -> s.length()!=length);
             showData(fibonacciSequence.getFibonacci().toString());
         }
         else showData(INSTRUCTION);
@@ -52,9 +57,7 @@ public class FibonacciSequenceConsoleProgram extends ConsoleApp {
                     FibonacciSequence fibonacciSequence = new FibonacciSequence();
                     fibonacciSequence.calculateFibonacciNumberToMax(new BigInteger(max));
                     fibonacciSequence.getFibonacci()
-                            .removeIf(s -> new BigInteger(s)
-                                    .compareTo(new BigInteger(min))==1 || new BigInteger(s)     // TODO: check
-                                    .compareTo(new BigInteger(min))==0);
+                            .removeIf(s -> new BigInteger(s).compareTo(new BigInteger(min))==-1);
                     showData(fibonacciSequence.getFibonacci().toString());
                 }
             }
@@ -71,11 +74,11 @@ public class FibonacciSequenceConsoleProgram extends ConsoleApp {
     }
 
     @Override
-    public ConsoleApp run() {
+    public ConsoleApp run(boolean commonFlag) {
         anchor:
         do{
-            showData(menu());
-            int i = StringConverter.StringToInt(inputDataFiltered("Your choice:\n"));
+            showData(menu(commonFlag));
+            int i = StringConverter.StringToInt(inputDataFiltered("Your choice:"));
             switch (i) {
                 case 1:
                     startFibonacciSequenceLength();
@@ -89,10 +92,12 @@ public class FibonacciSequenceConsoleProgram extends ConsoleApp {
                     showData(ConsoleApp.INSTRUCTION);
             }
         }while(!close());
-        return new ConsoleProgram();
+        if(commonFlag) return new ConsoleProgram();
+        else return null;
     }
 
-    private String menu(){
+    private String menu(boolean commonFlag){
+        if(commonFlag) return menu(NAME_PROGRAM,COMMON_MENU);
         return menu(NAME_PROGRAM,MENU);
     }
 }
