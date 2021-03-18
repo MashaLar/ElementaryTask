@@ -63,7 +63,8 @@ public class Triangle {
     private boolean checkTriangle(double firstSide, double secondSide, double thirdSide){
         return firstSide + secondSide >= thirdSide &&
                 firstSide + thirdSide >= secondSide &&
-                secondSide + thirdSide >= firstSide;
+                secondSide + thirdSide >= firstSide &&
+                firstSide>0 && secondSide>0 && thirdSide>0;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package task2.models;
 
+import task2.exception.NoSuchRectangleException;
+
 import java.util.Objects;
 
 public class Rectangle {
@@ -9,14 +11,16 @@ public class Rectangle {
 
     //constructor for rectangle
     public Rectangle(double biggerSide, double smallerSide) {
-        if(biggerSide>= smallerSide) {
-            this.biggerSide = biggerSide;
-            this.smallerSide = smallerSide;
+        if(checkRectangle(biggerSide, smallerSide)) {
+            if (biggerSide >= smallerSide) {
+                this.biggerSide = biggerSide;
+                this.smallerSide = smallerSide;
+            } else {
+                this.biggerSide = smallerSide;
+                this.smallerSide = biggerSide;
+            }
         }
-        else{
-            this.biggerSide = smallerSide;
-            this.smallerSide = biggerSide;
-        }
+        else throw new NoSuchRectangleException();
     }
     //constructor for special case of rectangle - square
     public Rectangle(double biggerSide) {
@@ -56,6 +60,10 @@ public class Rectangle {
     //method for finding value of diagonal
     public double calculateDiagonal (){
         return Math.pow(biggerSide*biggerSide+smallerSide*smallerSide, 0.5);
+    }
+
+    private boolean checkRectangle(double biggerSide, double smallerSide){
+        return biggerSide>0 && smallerSide>0;
     }
 
 }

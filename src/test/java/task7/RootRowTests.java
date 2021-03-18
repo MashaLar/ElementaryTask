@@ -1,204 +1,105 @@
 package task7;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import task7.util.RootRow;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class RootRowTests {
 
-    @Test
-    public void testGetRoundRootValid_MinValue() {
+    @ParameterizedTest
+    @CsvSource({"0,0", "0x7fffffff,46341", "57,8", "400,20"})
+    public void testGetRoundRootValid_IntegerValue(int numberSquare, int numberRoot) {
         //given
-        int square = 0;
+        int square = numberSquare;
         //expected
-        int expected = 0;
+        int expected = numberRoot;
         //actual
         int actual = RootRow.getRoundRoot(square);
 
         Assertions.assertEquals(expected, actual);
     }
 
-    @Test
-    public void testGetRoundRootValid_MaxValue() {
+    @ParameterizedTest
+    @CsvSource({"-1,0", "-0x7fffffff,0", "-57,0", "-400,0"})
+    public void testGetRoundRootNoneValid_IntegerValue(int numberSquare, int numberRoot){
         //given
-        int square = Integer.MAX_VALUE;
+        int square = numberSquare;
         //expected
-        int expected = 46341;
+        int expected = numberRoot;
         //actual
         int actual = RootRow.getRoundRoot(square);
 
         Assertions.assertEquals(expected, actual);
     }
 
-    @Test
-    public void testGetRoundRootNoneValid_NegativeValue() {
+    @ParameterizedTest
+    @ValueSource(strings = {"erwqre", "-ew", "vfe", "-423uierf", "3nui23j8", "7896r4", "2.3"})
+    public void testGetRoundRootNoneValid_StringValue(String string) {
         //given
-        int square = -9;
-        //expected
-        int expected = 0;
+        String square = string;
+
         //actual
-        int actual = RootRow.getRoundRoot(square);
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testGetRoundRootNoneValid_GreaterMaxValue() {
-        //given
-        int square = Integer.MAX_VALUE + Integer.MAX_VALUE;
-        //expected
-        int expected = 0;
-        //actual
-        int actual = RootRow.getRoundRoot(square);
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testGetRoundRootNoneValid_TripleGreaterMaxValue() {
-        //given
-        int square = Integer.MAX_VALUE + Integer.MAX_VALUE + Integer.MAX_VALUE;
-        //expected
-        int expected = 46341;
-        //actual
-        int actual = RootRow.getRoundRoot(square);
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testGetRoundRootNoneValid_StringValue() {
-        //given
-        String square = "rugtirg";
-        //expected
-        String expected = "java.lang.NumberFormatException: For input string: \"" + square + "\"";
-        //actual
-        Throwable actual = assertThrows(NumberFormatException.class,
+        assertThrows(NumberFormatException.class,
                 () -> RootRow.getRoundRoot((Integer.parseInt(square))));
 
-        Assertions.assertEquals(expected, actual.toString());
-//        try {
-//            RootRow.getRoundRoot((Integer.parseInt(square)));
-//        }catch (Exception actual){
-//            Assertions.assertEquals(expected,actual.getMessage());
-//        }
     }
 
-
-    @Test
-    public void testFindElementsValid_RandomValue() {
+    @ParameterizedTest
+    @MethodSource("validParametersForFindElements")
+    public void testFindElementsValid_IntegerValue(int numberSquare,
+                                                   int numberRoot,
+                                                   List<Integer> numbers) {
         //given
-        int square = 7;
-        int count = 5;
+        int square = numberSquare;
+        int count = numberRoot;
         //expected
-        List<Integer> expected = Arrays.asList(3, 4, 5, 6, 7);
+        List<Integer> expected = numbers;
         //actual
         List<Integer> actual = RootRow.findElements(count, square);
 
         Assertions.assertEquals(expected, actual);
     }
 
-    @Test
-    public void testFindElementsValid_MinValue() {
-        //given
-        int square = 0;
-        int count = 0;
-        //expected
-        List<Integer> expected = Collections.emptyList();
-        //actual
-        List<Integer> actual = RootRow.findElements(count, square);
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testFindElementsValid_MaxValueSquare() {
-        //given
-        int square = Integer.MAX_VALUE;
-        int count = 5;
-        //expected
-        List<Integer> expected = Arrays.asList(46341, 46342, 46343, 46344, 46345);
-        //actual
-        List<Integer> actual = RootRow.findElements(count, square);
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testFindElementsNoneValid_NegativeSquare() {
-        //given
-        int square = -9;
-        int count = 5;
-        //expected
-        List<Integer> expected = Arrays.asList(0, 1, 2, 3, 4);
-        //actual
-        List<Integer> actual = RootRow.findElements(count, square);
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testFindElementsNoneValid_GreaterMaxValueSquare() {
-        //given
-        int square = Integer.MAX_VALUE + 1;
-        int count = 5;
-        //expected
-        List<Integer> expected = Arrays.asList(0, 1, 2, 3, 4);
-        //actual
-        List<Integer> actual = RootRow.findElements(count, square);
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testFindElementsNoneValid_GreaterMaxValueCount() {
+    @ParameterizedTest
+    @ValueSource(ints = {-1, -89, -500, -90000, Integer.MIN_VALUE, Integer.MAX_VALUE+Integer.MAX_VALUE})
+    public void testFindElementsNoneValid_GreaterMaxValueCount(int number) {
         //given
         int square = 1;
-        int count = Integer.MAX_VALUE + Integer.MAX_VALUE;
-        //expected
-        String expected = "java.lang.IllegalArgumentException: " + count;
+        int count = number;
         //actual
-        Throwable actual = assertThrows(IllegalArgumentException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> RootRow.findElements(count, square));
-
-        Assertions.assertEquals(expected, actual.toString());
-
     }
 
-    @Test
-    public void testFindElementsNoneValid_NegativeCount() {
+    @ParameterizedTest
+    @ValueSource(strings = {"erwqre", "-ew", "vfe", "-423uierf", "3nui23j8", "7896r4", "2.3"})
+    public void testFindElementsNoneValid_StringValueCount(String string) {
         //given
         int square = 1;
-        int count = -5;
-        //expected
-        String expected = "java.lang.IllegalArgumentException: " + count;
+        String count = string;
         //actual
-        Throwable actual = assertThrows(IllegalArgumentException.class,
-                () -> RootRow.findElements(count, square));
-
-        Assertions.assertEquals(expected, actual.toString());
-
-    }
-
-    @Test
-    public void testFindElementsNoneValid_StringValueCount() {
-        //given
-        int square = 1;
-        String count = "rugtirg";
-        //expected
-        String expected = "java.lang.NumberFormatException: For input string: \"" + count + "\"";
-        //actual
-        Throwable actual = assertThrows(NumberFormatException.class,
+        assertThrows(NumberFormatException.class,
                 () -> RootRow.findElements(Integer.parseInt(count), square));
-        Assertions.assertEquals(expected, actual.toString());
-
     }
 
-
+    private static Stream<Arguments> validParametersForFindElements() {
+        return Stream.of(
+                Arguments.of(7, 5, Arrays.asList(3, 4, 5, 6, 7)),
+                Arguments.of(0, 0, Collections.emptyList()),
+                Arguments.of(Integer.MAX_VALUE, 3, Arrays.asList(46341, 46342, 46343)),
+                Arguments.of(-Integer.MAX_VALUE,  5, Arrays.asList(0, 1, 2, 3, 4)),
+                Arguments.of(-9, 5, Arrays.asList(0, 1, 2, 3, 4))
+        );
+    }
 }
