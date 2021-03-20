@@ -7,7 +7,6 @@ import task3.exception.NotExistTriangle;
 import task3.model.Triangle;
 import task3.controller.TriangleList;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class TriangleConsoleProgram extends ConsoleApp implements TriangleConsoleProgramStringConstants {
@@ -54,7 +53,7 @@ public class TriangleConsoleProgram extends ConsoleApp implements TriangleConsol
         double result = 0;
         do {
             result = StringConverter
-                    .StringToDouble(inputDataFiltered(message));
+                    .stringToDouble(inputDataFiltered(message));
             if (checkNumber(result)) {
                 return result;
             }
@@ -77,7 +76,7 @@ public class TriangleConsoleProgram extends ConsoleApp implements TriangleConsol
         boolean closeFlag = false;
         do{
             showData(menu(commonFlag));
-            int i = StringConverter.StringToInt(inputDataFiltered("Your choice:"));
+            int i = StringConverter.stringToInt(inputDataFiltered("Your choice:"));
             switch (i) {
                 case 1:
                     createNewTriangleAndAddToList();

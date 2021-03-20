@@ -44,13 +44,13 @@ public class RootRowConsoleProgram extends ConsoleApp {
     //method to border size and to check correct input of string
     private int convertToIntCount(String S){
         if(S.matches("[1-9]\\d{0,2}")){
-            return StringConverter.StringToInt(S);
+            return StringConverter.stringToInt(S);
         }
         return 0;
     }
     private int convertToIntSquare(String S){
         if(S.matches("[1-9]\\d{0,5}")){
-            return StringConverter.StringToInt(S);
+            return StringConverter.stringToInt(S);
         }
         return 0;
     }
@@ -60,7 +60,7 @@ public class RootRowConsoleProgram extends ConsoleApp {
         boolean closeFlag = false;
         do{
             showData(menu(commonFlag));
-            int i = StringConverter.StringToInt(inputDataFiltered("Your choice:"));
+            int i = StringConverter.stringToInt(inputDataFiltered("Your choice:"));
             switch (i) {
                 case 1:
                     startRootRowConsoleProgram();

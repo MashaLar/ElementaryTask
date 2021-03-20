@@ -4,6 +4,8 @@ import general.converter.StringConverter;
 import task1.presentation.ChessboardConsoleProgram;
 import task2.presentation.RectangleConsoleProgram;
 import task3.presentation.TriangleConsoleProgram;
+import task4.presentation.FileParserConsoleProgram;
+import task5.presentation.NumberToWordConsoleProgram;
 import task7.presentation.RootRowConsoleProgram;
 import task8.presentation.FibonacciSequenceConsoleProgram;
 
@@ -32,7 +34,7 @@ public class ConsoleProgram extends ConsoleApp{
         boolean closeFlag = false;
         do{
             showData(menu());
-            int i = StringConverter.StringToInt(inputDataFiltered("Your choice:"));
+            int i = StringConverter.stringToInt(inputDataFiltered("Your choice:"));
             switch (i) {
                 case 1:
                     return new ChessboardConsoleProgram(commonFlag);
@@ -41,9 +43,9 @@ public class ConsoleProgram extends ConsoleApp{
                 case 3:
                     return new TriangleConsoleProgram(commonFlag);
                 case 4:
-                    break;
+                    return new FileParserConsoleProgram(commonFlag);
                 case 5:
-                    break;
+                    return new NumberToWordConsoleProgram(commonFlag);
                 case 6:
                     break;
                 case 7:

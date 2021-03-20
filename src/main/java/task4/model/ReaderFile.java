@@ -26,7 +26,7 @@ public class ReaderFile {
         int i = 0;
         String s = readFile().toString();
         if(s.matches(".*"+word+".*")) {
-            i = s.split(".*"+word+".*").length + 1;
+            i = s.split(word).length - 1;
         }
         return i;
     }
@@ -36,7 +36,7 @@ public class ReaderFile {
             fileStream.close();
         }
         catch (IOException e){
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 

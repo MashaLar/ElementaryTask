@@ -15,7 +15,7 @@ public abstract class ConsoleApp implements Application {
     @Override
     public String inputDataFiltered(String someMessage) {
         System.out.println(someMessage);
-        return scanner.nextLine().replaceAll("[,;\\s]", "");
+        return StringConverter.stringIgnoreTabsSpaces(scanner.nextLine());
     }
 
     @Override
@@ -49,9 +49,9 @@ public abstract class ConsoleApp implements Application {
     }
 
     public boolean close(){
-        return StringConverter.StringIgnoreRegisterLow(
-                inputDataFiltered("\nDo you want to exit? (press 'y')"))
-                        .matches("y");
+        return StringConverter.stringIgnoreRegisterLow(
+                inputDataFiltered("\nDo you want to exit? (input 'y' or 'yes')"))
+                        .matches("y|yes");
     }
 
     public abstract ConsoleApp run(boolean commonFlag);

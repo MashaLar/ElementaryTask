@@ -6,8 +6,6 @@ import general.models.ConsoleProgram;
 import task2.models.Rectangle;
 import task2.util.RectanglesComparatorLikeEnvelopes;
 
-import java.util.Scanner;
-
 public class RectangleConsoleProgram extends ConsoleApp {
 
     private static final String NAME_PROGRAM = "Fibonacci sequence program";
@@ -55,9 +53,9 @@ public class RectangleConsoleProgram extends ConsoleApp {
     private double[] getSides() {
         double[] rectanglesSides = {0, 0};
         do {
-            rectanglesSides[0] = StringConverter.StringToDouble(inputDataFiltered(FIRST_SIDE));
+            rectanglesSides[0] = StringConverter.stringToDouble(inputDataFiltered(FIRST_SIDE));
             if (checkNumber(rectanglesSides[0])) {
-                rectanglesSides[1] = StringConverter.StringToDouble(inputDataFiltered(SECOND_SIDE));
+                rectanglesSides[1] = StringConverter.stringToDouble(inputDataFiltered(SECOND_SIDE));
                 if (checkNumber(rectanglesSides[1])) {
                     return rectanglesSides;
                 }
@@ -84,7 +82,7 @@ public class RectangleConsoleProgram extends ConsoleApp {
         boolean closeFlag = false;
         do{
             showData(menu(commonFlag));
-            int i = StringConverter.StringToInt(inputDataFiltered("Your choice:"));
+            int i = StringConverter.stringToInt(inputDataFiltered("Your choice:"));
             switch (i) {
                 case 1:
                     startRectangleConsoleProgram();

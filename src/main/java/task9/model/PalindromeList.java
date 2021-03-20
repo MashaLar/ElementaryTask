@@ -1,5 +1,7 @@
 package task9.model;
 
+import general.converter.StringConverter;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,7 +28,7 @@ public class PalindromeList {
     }
 
     private boolean isPalindrome(String str) {
-        return str.equals(new StringBuilder(str).reverse().toString());
+        return str.equals(StringConverter.reverseString(str));
     }
 
 }

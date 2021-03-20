@@ -39,7 +39,7 @@ public class ChessboardConsoleProgram extends ConsoleApp {
                     ConsoleChessboard consoleChessboard = new ConsoleChessboard(new Chessboard(m, n));
                     showData(consoleChessboard.CreateDesk());
                 }catch (NoSuchChessboardException ex){
-
+                    showData(INSTRUCTION);
                 }
             }
         }
@@ -52,7 +52,7 @@ public class ChessboardConsoleProgram extends ConsoleApp {
     //method to border size and to check correct input of string
     private static int convertToInt(String S){
         if(S.matches("[2-9]\\d{0,1}|\\d{2}")){
-            return StringConverter.StringToInt(S);
+            return StringConverter.stringToInt(S);
         }
         return 0;
     }
@@ -62,7 +62,7 @@ public class ChessboardConsoleProgram extends ConsoleApp {
         boolean closeFlag = false;
         do{
             showData(menu(commonFlag));
-            int i = StringConverter.StringToInt(inputDataFiltered("Your choice:"));
+            int i = StringConverter.stringToInt(inputDataFiltered("Your choice:"));
             switch (i) {
                 case 1:
                     startChessboardConsoleProgram();

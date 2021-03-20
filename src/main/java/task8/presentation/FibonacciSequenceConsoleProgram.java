@@ -38,7 +38,7 @@ public class FibonacciSequenceConsoleProgram extends ConsoleApp {
     }
 
     private void startFibonacciSequenceLength(){
-        int length = StringConverter.StringToInt(inputDataFiltered(LENGTH_NUM));
+        int length = StringConverter.stringToInt(inputDataFiltered(LENGTH_NUM));
         if (checkNumbersLength(length)) {
             FibonacciSequence fibonacciSequence = new FibonacciSequence();
             fibonacciSequence.calculateFibonacciNumberByLength(length);
@@ -50,9 +50,9 @@ public class FibonacciSequenceConsoleProgram extends ConsoleApp {
 
     private void startFibonacciSequenceInterval(){
         String min = inputDataFiltered(MIN_VALUE);
-        if(StringValidator.isNumber(min)){
+        if(StringValidator.isIntegerNumber(min)){
             String max = inputDataFiltered(MAX_VALUE);
-            if(StringValidator.isNumber(max)) {
+            if(StringValidator.isIntegerNumber(max)) {
                 if(checkNumbersIntervalNumber(min) && checkNumbersIntervalNumber(max)){
                     FibonacciSequence fibonacciSequence = new FibonacciSequence();
                     fibonacciSequence.calculateFibonacciNumberToMax(new BigInteger(max));
@@ -78,7 +78,7 @@ public class FibonacciSequenceConsoleProgram extends ConsoleApp {
         boolean closeFlag = false;
         do{
             showData(menu(commonFlag));
-            int i = StringConverter.StringToInt(inputDataFiltered("Your choice:"));
+            int i = StringConverter.stringToInt(inputDataFiltered("Your choice:"));
             switch (i) {
                 case 1:
                     startFibonacciSequenceLength();
