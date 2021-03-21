@@ -24,16 +24,24 @@ public class NumberToWordConsoleProgram extends ConsoleApp {
     private static final String INPUT_NUMBER = "\nInput number to translate:";
 
     public NumberToWordConsoleProgram(boolean commonFlag) {
+        showData(INSTRUCTION);
         run(commonFlag);
     }
 
-    public void startNumberToWordConsoleProgram(){
-        String number = StringConverter.stringIgnorePlus(inputDataFiltered(INPUT_NUMBER));
-        if(StringValidator.isIntegerNumber(number)){
-            NumberToWord numberToWord = new NumberToWord(number);
-            showData(numberToWord.toString());
-        }
-        else showData(INSTRUCTION);
+    public void startNumberToWordConsoleProgram() {
+        String number = getNumber();
+        NumberToWord numberToWord = new NumberToWord(number);
+        showData(numberToWord.toString());
+
+    }
+
+    private String getNumber() {
+        do {
+            String number = StringConverter.stringIgnorePlus(inputDataFiltered(INPUT_NUMBER));
+            if (StringValidator.isIntegerNumber(number)) {
+                return number;
+            } else showStandartWarning();
+        } while (true);
     }
 
     @Override

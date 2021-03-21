@@ -12,9 +12,10 @@ import java.util.logging.Logger;
 public class TriangleConsoleProgram extends ConsoleApp implements TriangleConsoleProgramStringConstants {
 
     private static final TriangleList triangleList = new TriangleList();
-    private static Logger log = Logger.getLogger(TriangleConsoleProgram.class.getName());
+   // private static Logger log = Logger.getLogger(TriangleConsoleProgram.class.getName());
 
     public TriangleConsoleProgram(boolean commonFlag){
+        showData(TriangleConsoleProgramStringConstants.INSTRUCTION);
         createStandardTriangleList();
         run(commonFlag);
     }
@@ -32,8 +33,7 @@ public class TriangleConsoleProgram extends ConsoleApp implements TriangleConsol
             }
             else showWarning(FAIL);
         }catch (NotExistTriangle e){
-            log.warning( "Exception: "+ e);
-            //showWarning(SIDE_WARNING_OF_TRIANGLE);
+            showData(e.getMessage());
         }
     }
 
@@ -57,7 +57,7 @@ public class TriangleConsoleProgram extends ConsoleApp implements TriangleConsol
             if (checkNumber(result)) {
                 return result;
             }
-            showData(TriangleConsoleProgramStringConstants.INSTRUCTION);
+            showStandartWarning();
         } while (true);
     }
 
@@ -93,7 +93,7 @@ public class TriangleConsoleProgram extends ConsoleApp implements TriangleConsol
                 default:
                     showData(ConsoleApp.INSTRUCTION);
             }
-        }while(!closeFlag); //race between threads warning and close
+        }while(!closeFlag);
         if(commonFlag) return new ConsoleProgram();
         else return null;
     }

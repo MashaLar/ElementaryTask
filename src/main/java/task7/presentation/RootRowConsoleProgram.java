@@ -9,7 +9,7 @@ public class RootRowConsoleProgram extends ConsoleApp {
 
     private static final String NAME_PROGRAM = "RootRow program";
     private static final String INSTRUCTION = "\n--------?Instruction?-------\n" +
-            "This program need two numbers integer. First one is count of numbers in row (from 1 to 999),\n" +
+            "This program need two integer numbers. First one is count of numbers in row (from 1 to 999),\n" +
             "second one is square of number that less than first element of row (from 1 to 999 999).\n" +
             "EXAMPLE. Input: 4 9. Output: [3, 4, 5, 6].\n";
     private static final String[] COMMON_MENU = {
@@ -19,46 +19,65 @@ public class RootRowConsoleProgram extends ConsoleApp {
     private static final String[] MENU = {
             "get natural row of elements which square greater than some number",
             "exit"
-    }; //TODO: make interface with commonMenu and make dependency for run method
+    };
     private static final String INPUT_COUNT_OF_NUMBERS = "\nInput count of numbers in row:";
     private static final String INPUT_SQUARE_NUMBER = "\nInput square number:";
 
-    public RootRowConsoleProgram(boolean commonFlag){
+    public RootRowConsoleProgram(boolean commonFlag) {
+        showData(INSTRUCTION);
         run(commonFlag);
     }
 
-    public void startRootRowConsoleProgram(){
-        int count = convertToIntCount(inputDataFiltered(INPUT_COUNT_OF_NUMBERS));
-        int square = convertToIntSquare(inputDataFiltered(INPUT_SQUARE_NUMBER));
-        if (checkNumber(count, square)) {
-            showData(RootRow.findElements(count,square).toString());
-        }
-        else showData(INSTRUCTION);
+    public void startRootRowConsoleProgram() {
+        int count = getCount();
+        int square = getSquare();
+        showData(RootRow.findElements(count, square).toString());
+    }
+
+    private int getCount() {
+        int num = 0;
+        do {
+            num = convertToIntCount(inputDataFiltered(INPUT_COUNT_OF_NUMBERS));
+            if (checkNumber(num)) {
+                return num;
+            } else showStandartWarning();
+        } while (true);
+    }
+
+    private int getSquare() {
+        int num = 0;
+        do {
+            num = convertToIntSquare(inputDataFiltered(INPUT_SQUARE_NUMBER));
+            if (checkNumber(num)) {
+                return num;
+            } else showStandartWarning();
+        } while (true);
     }
 
     //method to check correct input
-    private boolean checkNumber(int count, int square){
-        return count != 0 && square != 0;
+    private boolean checkNumber(int num) {
+        return num != 0;
     }
 
     //method to border size and to check correct input of string
-    private int convertToIntCount(String S){
-        if(S.matches("[1-9]\\d{0,2}")){
+    private int convertToIntCount(String S) {
+        if (S.matches("[1-9]\\d{0,2}")) {
             return StringConverter.stringToInt(S);
         }
         return 0;
     }
-    private int convertToIntSquare(String S){
-        if(S.matches("[1-9]\\d{0,5}")){
+
+    private int convertToIntSquare(String S) {
+        if (S.matches("[1-9]\\d{0,5}")) {
             return StringConverter.stringToInt(S);
         }
         return 0;
     }
 
     @Override
-    public ConsoleApp run(boolean commonFlag){
+    public ConsoleApp run(boolean commonFlag) {
         boolean closeFlag = false;
-        do{
+        do {
             showData(menu(commonFlag));
             int i = StringConverter.stringToInt(inputDataFiltered("Your choice:"));
             switch (i) {
@@ -71,16 +90,13 @@ public class RootRowConsoleProgram extends ConsoleApp {
                 default:
                     showData(ConsoleApp.INSTRUCTION);
             }
-        }while(!closeFlag);
-        if(commonFlag) return new ConsoleProgram();
+        } while (!closeFlag);
+        if (commonFlag) return new ConsoleProgram();
         else return null;
     }
 
-    private String menu(boolean commonFlag){
-        if(commonFlag) return menu(NAME_PROGRAM,COMMON_MENU);
-        return menu(NAME_PROGRAM,MENU);
+    private String menu(boolean commonFlag) {
+        if (commonFlag) return menu(NAME_PROGRAM, COMMON_MENU);
+        return menu(NAME_PROGRAM, MENU);
     }
-
-
-
 }

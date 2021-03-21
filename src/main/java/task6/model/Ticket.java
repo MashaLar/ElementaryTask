@@ -17,11 +17,21 @@ public class Ticket implements Comparable<Ticket>{
     }
 
     public int[] getIntArrayFromString(){
-        return Stream.of(ticket.split("")).mapToInt(Integer::parseInt).toArray();
+        return Stream.of(ticket.split(""))
+                .mapToInt(Integer::parseInt).toArray();
     }
 
-    public String addNumToTicket(int number){
-        return new BigInteger(ticket).add(BigInteger.valueOf(number)).toString();
+    public String addNumToTicket(String number){
+        int oldLength = ticket.length();
+        String newTicket = new BigInteger(ticket).add(new BigInteger(number)).toString();
+        while(oldLength != newTicket.length() ){
+            newTicket = "0"+newTicket;
+        }
+        return newTicket;
+    }
+
+    public BigInteger subNumToTicket(String number){
+        return new BigInteger(ticket).subtract(new BigInteger(number));
     }
 
     @Override

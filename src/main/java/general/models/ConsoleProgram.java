@@ -6,6 +6,7 @@ import task2.presentation.RectangleConsoleProgram;
 import task3.presentation.TriangleConsoleProgram;
 import task4.presentation.FileParserConsoleProgram;
 import task5.presentation.NumberToWordConsoleProgram;
+import task6.presentation.HappyTicketsConsoleProgram;
 import task7.presentation.RootRowConsoleProgram;
 import task8.presentation.FibonacciSequenceConsoleProgram;
 
@@ -47,7 +48,7 @@ public class ConsoleProgram extends ConsoleApp{
                 case 5:
                     return new NumberToWordConsoleProgram(commonFlag);
                 case 6:
-                    break;
+                    return new HappyTicketsConsoleProgram(commonFlag);
                 case 7:
                     return new RootRowConsoleProgram(commonFlag);
                 case 8:

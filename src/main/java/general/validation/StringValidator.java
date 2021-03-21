@@ -5,6 +5,9 @@ public class StringValidator {
     public static boolean isIntegerNumber(String S){
         return S.matches("-?\\d+");
     }
+    public static boolean isPositiveIntegerNumber(String S){
+        return S.matches("\\d+");
+    }
     public static boolean isInt(String S){
         return S.matches("-?\\d{1,9}");
     }

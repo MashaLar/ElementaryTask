@@ -31,6 +31,7 @@ public class FileParserConsoleProgram extends ConsoleApp {
 
     //constructor
     public FileParserConsoleProgram(boolean commonFlag) {
+        showData(INSTRUCTION);
         run(commonFlag);
     }
 
@@ -43,10 +44,10 @@ public class FileParserConsoleProgram extends ConsoleApp {
                 showData(OUTPUT_RESULT+" \""+pattern+"\": "+readerFile.countOfRegex(pattern));
                 readerFile.closeFile();
             } catch (FileNotFoundException e) {
-                showData(INSTRUCTION);
+                showData(e.getMessage());
             }
 
-        } else showData(INSTRUCTION);
+        } else showStandartWarning();
     }
 
     @Override

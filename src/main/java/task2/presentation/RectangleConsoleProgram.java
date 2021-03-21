@@ -32,16 +32,15 @@ public class RectangleConsoleProgram extends ConsoleApp {
     private static final String SECOND_IN_FIRST = "The second envelope is inserted into the first.";
 
     public RectangleConsoleProgram(boolean commonFlag){
+        showData(INSTRUCTION);
         run(commonFlag);
     }
 
     public void startRectangleConsoleProgram(){
-        showData(FIRST_RECTANGLE);
-        double[] rectangle = getSides();
+        double[] rectangle = getSides(FIRST_RECTANGLE);
         Rectangle rectangle1 = new Rectangle(rectangle[0],rectangle[1]);
 
-        showData(SECOND_RECTANGLE);
-        rectangle = getSides();
+        rectangle = getSides(SECOND_RECTANGLE);
         Rectangle rectangle2 = new Rectangle(rectangle[0],rectangle[1]);
 
         compareResult(RectanglesComparatorLikeEnvelopes.compare(rectangle1, rectangle2),
@@ -50,7 +49,8 @@ public class RectangleConsoleProgram extends ConsoleApp {
 
     private boolean checkNumber(double number){ return number != 0.0 && number<=1000; }
 
-    private double[] getSides() {
+    private double[] getSides(String message) {
+        showData(message);
         double[] rectanglesSides = {0, 0};
         do {
             rectanglesSides[0] = StringConverter.stringToDouble(inputDataFiltered(FIRST_SIDE));
@@ -59,9 +59,9 @@ public class RectangleConsoleProgram extends ConsoleApp {
                 if (checkNumber(rectanglesSides[1])) {
                     return rectanglesSides;
                 }
-                showData(INSTRUCTION);
+                showStandartWarning();
             }
-            showData(INSTRUCTION);
+            showStandartWarning();
         } while (true);
     }
 

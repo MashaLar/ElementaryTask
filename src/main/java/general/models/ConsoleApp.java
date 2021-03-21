@@ -34,6 +34,10 @@ public abstract class ConsoleApp implements Application {
         System.err.println(someMessage);
     }
 
+    public synchronized void showStandartWarning() {
+        System.err.println("=Wrong input! Please try again!=\n");
+    }
+
     public boolean hasNext(String pattern){
         return scanner.hasNext(pattern);
     }
