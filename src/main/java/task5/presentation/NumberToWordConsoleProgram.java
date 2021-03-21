@@ -8,7 +8,7 @@ import task5.model.NumberToWord;
 
 public class NumberToWordConsoleProgram extends ConsoleApp {
     private static final String NAME_PROGRAM = "Translator Number To Word program";
-    private static final String INSTRUCTION = "\n--------?Instruction?-------\n" +
+    private static final String INSTRUCTION =  "------?Instruction?------\n" +
             "This program need integer number (from -10^33 to 10^33).\n" +
             "Translator will translate numbers in words.\n" +
             "EXAMPLE. Input: 234.\n" +
@@ -23,16 +23,25 @@ public class NumberToWordConsoleProgram extends ConsoleApp {
     };
     private static final String INPUT_NUMBER = "\nInput number to translate:";
 
-    public NumberToWordConsoleProgram(boolean commonFlag) {
-        showData(INSTRUCTION);
-        run(commonFlag);
+    public NumberToWordConsoleProgram(boolean commonFlag, String... args) {
+        if (args.length == 1) {
+            startNumberToWordConsoleProgram(args);
+        } else run(commonFlag);
     }
 
     public void startNumberToWordConsoleProgram() {
         String number = getNumber();
         NumberToWord numberToWord = new NumberToWord(number);
-        showData(numberToWord.toString());
+        showResult(numberToWord.toString());
+    }
 
+    public void startNumberToWordConsoleProgram(String... args) {
+        String number = StringConverter.stringIgnoreTabsSpacesPlus(args[0]);
+        if(StringValidator.isIntegerNumber(number)) {
+            NumberToWord numberToWord = new NumberToWord(number);
+            showResult(numberToWord.toString());
+        }
+        else showInstruction(INSTRUCTION);
     }
 
     private String getNumber() {
@@ -40,7 +49,10 @@ public class NumberToWordConsoleProgram extends ConsoleApp {
             String number = StringConverter.stringIgnorePlus(inputDataFiltered(INPUT_NUMBER));
             if (StringValidator.isIntegerNumber(number)) {
                 return number;
-            } else showStandartWarning();
+            } else{
+                showStandartWarning();
+                showInstruction(INSTRUCTION);
+            }
         } while (true);
     }
 
@@ -58,7 +70,8 @@ public class NumberToWordConsoleProgram extends ConsoleApp {
                     closeFlag = close();
                     break;
                 default:
-                    showData(ConsoleApp.INSTRUCTION);
+                    showStandartWarning();
+                    showInstruction(ConsoleApp.INSTRUCTION);
             }
         } while (!closeFlag);
         if (commonFlag) return new ConsoleProgram();

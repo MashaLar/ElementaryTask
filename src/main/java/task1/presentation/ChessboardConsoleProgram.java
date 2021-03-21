@@ -11,7 +11,7 @@ import task1.controller.ConsoleChessboard;
 public class ChessboardConsoleProgram extends ConsoleApp {
 
     private static final String NAME_PROGRAM = "Chessboard program";
-    private static final String INSTRUCTION = "\n--------?Instruction?-------\n" +
+    private static final String INSTRUCTION = "------?Instruction?------\n" +
             "This program need two integer numbers(from 1 to 99). First one is count of rows,\n" +
             "second one is count of columns.\n" +
             "EXAMPLE. Input: 2 2. Output:\n \u25A0 \u25A1 \n \u25A0 \u25A1.\n";
@@ -27,9 +27,10 @@ public class ChessboardConsoleProgram extends ConsoleApp {
     private static final String COLUMNS = "\nInput count of columns:";
 
     //constructor
-    public ChessboardConsoleProgram(boolean commonFlag) {
-        showData(INSTRUCTION);
-        run(commonFlag);
+    public ChessboardConsoleProgram(boolean commonFlag, String... args) {
+        if (args.length == 2) {
+            startChessboardConsoleProgram(args);
+        } else run(commonFlag);
     }
 
     private void startChessboardConsoleProgram() {
@@ -37,11 +38,23 @@ public class ChessboardConsoleProgram extends ConsoleApp {
         int n = getNumber(COLUMNS);
         try {
             ConsoleChessboard consoleChessboard = new ConsoleChessboard(new Chessboard(m, n));
-            showData(consoleChessboard.CreateDesk());
+            showResult(consoleChessboard.CreateDesk());
         } catch (NoSuchChessboardException ex) {
-            showData(ex.getMessage());
+            showWarning(ex.getMessage());
         }
 
+    }
+
+    private void startChessboardConsoleProgram(String... args) {
+        int m = convertToInt(args[0]);
+        int n = convertToInt(args[1]);
+        try {
+            ConsoleChessboard consoleChessboard = new ConsoleChessboard(new Chessboard(m, n));
+            showResult(consoleChessboard.CreateDesk());
+        } catch (NoSuchChessboardException ex) {
+            showWarning(ex.getMessage());
+            showInstruction(INSTRUCTION);
+        }
     }
 
     private int getNumber(String message) {
@@ -52,6 +65,7 @@ public class ChessboardConsoleProgram extends ConsoleApp {
                 return result;
             }
             showStandartWarning();
+            showInstruction(INSTRUCTION);
         } while (true);
     }
 
@@ -82,7 +96,8 @@ public class ChessboardConsoleProgram extends ConsoleApp {
                     closeFlag = close();
                     break;
                 default:
-                    showData(ConsoleApp.INSTRUCTION);
+                    showStandartWarning();
+                    showInstruction(ConsoleApp.INSTRUCTION);
             }
         } while (!closeFlag);
         if (commonFlag) return new ConsoleProgram();

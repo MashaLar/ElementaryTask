@@ -4,9 +4,10 @@ import general.converter.StringConverter;
 
 import java.util.Scanner;
 
-public abstract class ConsoleApp implements Application {
 
-    protected static final String INSTRUCTION = "\n--------?Instruction?-------\n" +
+public abstract class ConsoleApp implements Application, StringColorConsts{
+
+    protected static final String INSTRUCTION = "------?Instruction?------\n" +
             "Input number according to chosen action.\n" +
             "EXAMPLE. Input: 1. Output: started one of actions";
 
@@ -31,20 +32,28 @@ public abstract class ConsoleApp implements Application {
 
     @Override
     public void showWarning(String someMessage) {
-        System.err.println(someMessage);
+        showData(ANSI_RED_BOLD +
+                someMessage + ANSI_RESET);
     }
 
-    public synchronized void showStandartWarning() {
-        System.err.println("=Wrong input! Please try again!=\n");
+    public void showStandartWarning() {
+        showData(ANSI_RED_BOLD +
+                "=Wrong input! Please try again!=" + ANSI_RESET);
     }
 
-    public boolean hasNext(String pattern){
-        return scanner.hasNext(pattern);
+    public void showInstruction(String instruction) {
+        showData(ANSI_CYAN_CURSIVE +
+                instruction + ANSI_RESET);
+    }
+
+    public void showResult(String result) {
+        showData(ANSI_WHITE_BOLD +
+                result + ANSI_RESET);
     }
 
     public String menu(String nameOfProgram, String... menuPoints){
         StringBuilder menu = new StringBuilder();
-        menu.append("\n=========This is "+nameOfProgram+"========\n" +
+        menu.append(ANSI_BLUE + "\n=========This is "+nameOfProgram+"========\n" + ANSI_RESET+
                 "Chose what you want to do:");
         for (int i =0; i< menuPoints.length;i++) {
             menu.append("\n"+(i+1)+")"+menuPoints[i]);
@@ -54,7 +63,9 @@ public abstract class ConsoleApp implements Application {
 
     public boolean close(){
         return StringConverter.stringIgnoreRegisterLow(
-                inputDataFiltered("\nDo you want to exit? (input 'y' or 'yes')"))
+                inputDataFiltered(ANSI_YELLOW +
+                        "\nDo you want to exit? (input 'y' or 'yes')" +
+                        ANSI_RESET))
                         .matches("y|yes");
     }
 

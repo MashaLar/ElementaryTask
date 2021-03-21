@@ -9,6 +9,7 @@ import task5.presentation.NumberToWordConsoleProgram;
 import task6.presentation.HappyTicketsConsoleProgram;
 import task7.presentation.RootRowConsoleProgram;
 import task8.presentation.FibonacciSequenceConsoleProgram;
+import task9.presentation.PalindromeListConsoleProgram;
 
 public class ConsoleProgram extends ConsoleApp{
 
@@ -54,12 +55,13 @@ public class ConsoleProgram extends ConsoleApp{
                 case 8:
                     return new FibonacciSequenceConsoleProgram(commonFlag);
                 case 9:
-                    break;
+                    return new PalindromeListConsoleProgram(commonFlag);
                 case 10:
                     closeFlag = close();
                     break;
                 default:
-                    showData(ConsoleApp.INSTRUCTION);
+                    showStandartWarning();
+                    showInstruction(ConsoleApp.INSTRUCTION);
             }
         }while(!closeFlag);
         return null;

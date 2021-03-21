@@ -2,6 +2,7 @@ package task9.model;
 
 import general.converter.StringConverter;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -41,9 +42,9 @@ public class PalindromeList {
     @Override
     public String toString() {
         return palindromes.stream()
+                .sorted(Comparator.comparingInt(String::length))
                 .filter(string -> !string.matches(""))
-                .collect(Collectors.joining(", ", "All palindromes: ", "."));
+                .collect(Collectors.joining(", ", "\nAll palindromes: ", "."));
     }
-
 
 }

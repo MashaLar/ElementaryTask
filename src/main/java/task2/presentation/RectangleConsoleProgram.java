@@ -9,7 +9,7 @@ import task2.util.RectanglesComparatorLikeEnvelopes;
 public class RectangleConsoleProgram extends ConsoleApp {
 
     private static final String NAME_PROGRAM = "Fibonacci sequence program";
-    private static final String INSTRUCTION = "\n--------?Instruction?-------\n" +
+    private static final String INSTRUCTION = "------?Instruction?------\n" +
             "This program need two rectangles-envelopes(2 number for one).\n" +
             "After it gets 2 rectangles program will compare them and tell which one can put in other.\n" +
             "Sides shouldn`t be greater than 1000mm(because we can`t imagine envelope greater)\n" +
@@ -31,23 +31,24 @@ public class RectangleConsoleProgram extends ConsoleApp {
     private static final String FIRST_IN_SECOND = "The first envelope is inserted into the second.";
     private static final String SECOND_IN_FIRST = "The second envelope is inserted into the first.";
 
-    public RectangleConsoleProgram(boolean commonFlag){
-        showData(INSTRUCTION);
+    public RectangleConsoleProgram(boolean commonFlag) {
         run(commonFlag);
     }
 
-    public void startRectangleConsoleProgram(){
+    public void startRectangleConsoleProgram() {
         double[] rectangle = getSides(FIRST_RECTANGLE);
-        Rectangle rectangle1 = new Rectangle(rectangle[0],rectangle[1]);
+        Rectangle rectangle1 = new Rectangle(rectangle[0], rectangle[1]);
 
         rectangle = getSides(SECOND_RECTANGLE);
-        Rectangle rectangle2 = new Rectangle(rectangle[0],rectangle[1]);
+        Rectangle rectangle2 = new Rectangle(rectangle[0], rectangle[1]);
 
         compareResult(RectanglesComparatorLikeEnvelopes.compare(rectangle1, rectangle2),
-                        RectanglesComparatorLikeEnvelopes.compare(rectangle2, rectangle1));
+                RectanglesComparatorLikeEnvelopes.compare(rectangle2, rectangle1));
     }
 
-    private boolean checkNumber(double number){ return number != 0.0 && number<=1000; }
+    private boolean checkNumber(double number) {
+        return number != 0.0 && number <= 1000;
+    }
 
     private double[] getSides(String message) {
         showData(message);
@@ -60,27 +61,29 @@ public class RectangleConsoleProgram extends ConsoleApp {
                     return rectanglesSides;
                 }
                 showStandartWarning();
+                showInstruction(INSTRUCTION);
             }
             showStandartWarning();
+            showInstruction(INSTRUCTION);
         } while (true);
     }
 
-    private void compareResult(int result1, int result2){
-        if(result1 == 1){
-            showData(SECOND_IN_FIRST);
-        }
-        if(result2 == 1){
-            showData(FIRST_IN_SECOND);
-        }
-        if(result1 == 0 && result2 ==0){
-            showData("They equals!");
+    private void compareResult(int result1, int result2) {
+        if (result1 == 1) {
+            showResult(SECOND_IN_FIRST);
+        } else if (result2 == 1) {
+            showResult(FIRST_IN_SECOND);
+        } else if (result1 == 0 && result2 == 0) {
+            showResult("They are equal!");
+        } else {
+            showResult("They are incompatible!");
         }
     }
 
     @Override
     public ConsoleApp run(boolean commonFlag) {
         boolean closeFlag = false;
-        do{
+        do {
             showData(menu(commonFlag));
             int i = StringConverter.stringToInt(inputDataFiltered("Your choice:"));
             switch (i) {
@@ -91,15 +94,16 @@ public class RectangleConsoleProgram extends ConsoleApp {
                     closeFlag = close();
                     break;
                 default:
-                    showData(ConsoleApp.INSTRUCTION);
+                    showStandartWarning();
+                    showInstruction(ConsoleApp.INSTRUCTION);
             }
-        }while(!closeFlag);
-        if(commonFlag) return new ConsoleProgram();
+        } while (!closeFlag);
+        if (commonFlag) return new ConsoleProgram();
         else return null;
     }
 
-    private String menu(boolean commonFlag){
-        if(commonFlag) return menu(NAME_PROGRAM,COMMON_MENU);
-        return menu(NAME_PROGRAM,MENU);
+    private String menu(boolean commonFlag) {
+        if (commonFlag) return menu(NAME_PROGRAM, COMMON_MENU);
+        return menu(NAME_PROGRAM, MENU);
     }
 }

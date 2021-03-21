@@ -30,7 +30,8 @@ public class TriangleList {
 
     //method to add new triangle to list
     public boolean addTriangle(Triangle triangle) {
-        return triangleList.add(triangle);
+        if(findByName(triangle.getName())==null) return triangleList.add(triangle);
+        return false;
     }
 
     //method to delete triangle by name

@@ -2,7 +2,7 @@ package task6.presentation;
 
 public interface HappyTicketsConsoleProgramConsts {
     String NAME_PROGRAM = "Happy Tickets program";
-    String INSTRUCTION = "\n--------?Instruction?-------\n" +
+    String INSTRUCTION =  "------?Instruction?------\n" +
             "This program need two integer numbers (interval shouldn`t be greater 100000).\n" +
             "First one is minimum ticket, second one is maximum.\n" +
             "Size of ticket will be count of numerals in maximum ticket.\n" +

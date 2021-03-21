@@ -24,4 +24,9 @@ public class StringConverter {
     public static String reverseString(String S) {
         return new StringBuilder(S).reverse().toString();
     }
+    public static String stringIgnoreTabsSpacesPlus(String S){
+        return S.replaceAll("[+.,;\\s\t]+",
+                "");
+    }
+
 }

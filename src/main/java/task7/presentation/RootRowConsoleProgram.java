@@ -8,7 +8,7 @@ import task7.util.RootRow;
 public class RootRowConsoleProgram extends ConsoleApp {
 
     private static final String NAME_PROGRAM = "RootRow program";
-    private static final String INSTRUCTION = "\n--------?Instruction?-------\n" +
+    private static final String INSTRUCTION =  "------?Instruction?------\n" +
             "This program need two integer numbers. First one is count of numbers in row (from 1 to 999),\n" +
             "second one is square of number that less than first element of row (from 1 to 999 999).\n" +
             "EXAMPLE. Input: 4 9. Output: [3, 4, 5, 6].\n";
@@ -23,15 +23,22 @@ public class RootRowConsoleProgram extends ConsoleApp {
     private static final String INPUT_COUNT_OF_NUMBERS = "\nInput count of numbers in row:";
     private static final String INPUT_SQUARE_NUMBER = "\nInput square number:";
 
-    public RootRowConsoleProgram(boolean commonFlag) {
-        showData(INSTRUCTION);
-        run(commonFlag);
+    public RootRowConsoleProgram(boolean commonFlag, String... args) {
+        if (args.length == 2) {
+            startRootRowConsoleProgram(args);
+        } else run(commonFlag);
     }
 
     public void startRootRowConsoleProgram() {
         int count = getCount();
         int square = getSquare();
-        showData(RootRow.findElements(count, square).toString());
+        showResult(RootRow.findElements(count, square).toString());
+    }
+
+    public void startRootRowConsoleProgram(String... args) {
+        int count = convertToIntCount(StringConverter.stringIgnoreTabsSpacesPlus(args[0]));
+        int square = convertToIntSquare(StringConverter.stringIgnoreTabsSpacesPlus(args[1]));
+        showResult(RootRow.findElements(count, square).toString());
     }
 
     private int getCount() {
@@ -40,7 +47,10 @@ public class RootRowConsoleProgram extends ConsoleApp {
             num = convertToIntCount(inputDataFiltered(INPUT_COUNT_OF_NUMBERS));
             if (checkNumber(num)) {
                 return num;
-            } else showStandartWarning();
+            } else {
+                showStandartWarning();
+                showInstruction(INSTRUCTION);
+            }
         } while (true);
     }
 
@@ -50,7 +60,10 @@ public class RootRowConsoleProgram extends ConsoleApp {
             num = convertToIntSquare(inputDataFiltered(INPUT_SQUARE_NUMBER));
             if (checkNumber(num)) {
                 return num;
-            } else showStandartWarning();
+            } else {
+                showStandartWarning();
+                showInstruction(INSTRUCTION);
+            }
         } while (true);
     }
 
@@ -88,7 +101,8 @@ public class RootRowConsoleProgram extends ConsoleApp {
                     closeFlag = close();
                     break;
                 default:
-                    showData(ConsoleApp.INSTRUCTION);
+                    showStandartWarning();
+                    showInstruction(ConsoleApp.INSTRUCTION);
             }
         } while (!closeFlag);
         if (commonFlag) return new ConsoleProgram();

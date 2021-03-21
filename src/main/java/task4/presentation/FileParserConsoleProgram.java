@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
 public class FileParserConsoleProgram extends ConsoleApp {
 
     private static final String NAME_PROGRAM = "File Parser program";
-    private static final String INSTRUCTION = "\n--------?Instruction?-------\n" +
+    private static final String INSTRUCTION = "------?Instruction?------\n" +
             "This program need path to file and phrase/word.\n" +
             "File Parser will show count of occurrence this pattern in file.\n" +
             "Path should be absolute or your file should be in one folder.\n" +
@@ -31,7 +31,6 @@ public class FileParserConsoleProgram extends ConsoleApp {
 
     //constructor
     public FileParserConsoleProgram(boolean commonFlag) {
-        showData(INSTRUCTION);
         run(commonFlag);
     }
 
@@ -41,13 +40,16 @@ public class FileParserConsoleProgram extends ConsoleApp {
             String pattern = inputData(INPUT_PATTERN);
             try {
                 ReaderFile readerFile = new ReaderFile(filePath);
-                showData(OUTPUT_RESULT+" \""+pattern+"\": "+readerFile.countOfRegex(pattern));
+                showResult(OUTPUT_RESULT + " \"" + pattern + "\": " +
+                        readerFile.countOfRegex(pattern));
                 readerFile.closeFile();
             } catch (FileNotFoundException e) {
-                showData(e.getMessage());
+                showWarning(e.getMessage());
             }
-
-        } else showStandartWarning();
+        } else {
+            showStandartWarning();
+            showInstruction(INSTRUCTION);
+        }
     }
 
     @Override
@@ -64,7 +66,8 @@ public class FileParserConsoleProgram extends ConsoleApp {
                     closeFlag = close();
                     break;
                 default:
-                    showData(ConsoleApp.INSTRUCTION);
+                    showStandartWarning();
+                    showInstruction(ConsoleApp.INSTRUCTION);
             }
         } while (!closeFlag);
         if (commonFlag) return new ConsoleProgram();

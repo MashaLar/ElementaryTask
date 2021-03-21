@@ -11,11 +11,9 @@ import java.util.logging.Logger;
 
 public class TriangleConsoleProgram extends ConsoleApp implements TriangleConsoleProgramStringConstants {
 
-    private static final TriangleList triangleList = new TriangleList();
-   // private static Logger log = Logger.getLogger(TriangleConsoleProgram.class.getName());
+    private final TriangleList triangleList = new TriangleList();
 
     public TriangleConsoleProgram(boolean commonFlag){
-        showData(TriangleConsoleProgramStringConstants.INSTRUCTION);
         createStandardTriangleList();
         run(commonFlag);
     }
@@ -28,25 +26,26 @@ public class TriangleConsoleProgram extends ConsoleApp implements TriangleConsol
         try {
             Triangle triangle = new Triangle(
                     name,triangleFirstSide,triangleSecondSide,triangleThirdSide);
-            if(triangleList.addTriangle(triangle)){
-                showData(SUCCESS);
-            }
-            else showWarning(FAIL);
+            showSuccessOrFail(triangleList.addTriangle(triangle), ALREADY_EXIST_TRIANGLE);
         }catch (NotExistTriangle e){
-            showData(e.getMessage());
+            showWarning(e.getMessage());
         }
     }
 
     private void deleteTriangleFromList(){
         String name = inputDataFiltered(INPUT_NAME_OF_TRIANGLE);
-        if(triangleList.removeTriangle(name)){
-            showData(SUCCESS);
+        showSuccessOrFail(triangleList.removeTriangle(name),NOT_FOUND_TRIANGLE);
+    }
+
+    private void showSuccessOrFail(boolean result, String failMessage){
+        if(result){
+            showResult(SUCCESS);
         }
-        else showWarning(FAIL);
+        else showWarning(failMessage);
     }
 
     private void printSortedList(){
-       showData(triangleList.toString());
+       showResult(triangleList.toString());
     }
 
     private double getSide(String message) {
@@ -58,6 +57,7 @@ public class TriangleConsoleProgram extends ConsoleApp implements TriangleConsol
                 return result;
             }
             showStandartWarning();
+            showInstruction(ConsoleApp.INSTRUCTION);
         } while (true);
     }
 
@@ -91,7 +91,8 @@ public class TriangleConsoleProgram extends ConsoleApp implements TriangleConsol
                     closeFlag = close();
                     break;
                 default:
-                    showData(ConsoleApp.INSTRUCTION);
+                    showStandartWarning();
+                    showInstruction(ConsoleApp.INSTRUCTION);
             }
         }while(!closeFlag);
         if(commonFlag) return new ConsoleProgram();

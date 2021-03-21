@@ -11,7 +11,7 @@ import java.math.BigInteger;
 public class FibonacciSequenceConsoleProgram extends ConsoleApp {
 
     private static final String NAME_PROGRAM = "Fibonacci sequence program";
-    private static final String INSTRUCTION = "\n--------?Instruction?-------\n" +
+    private static final String INSTRUCTION = "------?Instruction?------\n" +
             "This program need one or two integer numbers. If you input one number (from 1 to 99),\n" +
             "than program will print numbers which lengths equals it.\n" +
             "If you input two numbers (from 0 to number which contains 99 numerals).\n" +
@@ -33,7 +33,6 @@ public class FibonacciSequenceConsoleProgram extends ConsoleApp {
 
     //constructor
     public FibonacciSequenceConsoleProgram(boolean commonFlag) {
-        showData(INSTRUCTION);
         run(commonFlag);
     }
 
@@ -43,8 +42,11 @@ public class FibonacciSequenceConsoleProgram extends ConsoleApp {
             FibonacciSequence fibonacciSequence = new FibonacciSequence();
             fibonacciSequence.calculateFibonacciNumberByLength(length);
             fibonacciSequence.getFibonacci().removeIf(s -> s.length() != length);
-            showData(fibonacciSequence.getFibonacci().toString());
-        } else showStandartWarning();
+            showResult(fibonacciSequence.getFibonacci().toString());
+        } else{
+            showStandartWarning();
+            showInstruction(INSTRUCTION);
+        }
     }
 
     private void startFibonacciSequenceInterval() {
@@ -57,7 +59,10 @@ public class FibonacciSequenceConsoleProgram extends ConsoleApp {
                     .removeIf(s -> new BigInteger(s).compareTo(new BigInteger(min)) == -1);
             showData(fibonacciSequence.getFibonacci().toString());
         }
-        else showStandartWarning();
+        else {
+            showStandartWarning();
+            showInstruction(INSTRUCTION);
+        }
     }
 
     private String getBigInteger(String message) {
@@ -66,7 +71,10 @@ public class FibonacciSequenceConsoleProgram extends ConsoleApp {
             string = inputDataFiltered(message);
             if (StringValidator.isIntegerNumber(string)) {
                 return string;
-            } else showStandartWarning();
+            } else {
+                showStandartWarning();
+                showInstruction(INSTRUCTION);
+            }
         } while (true);
     }
 
@@ -95,7 +103,8 @@ public class FibonacciSequenceConsoleProgram extends ConsoleApp {
                     closeFlag = close();
                     break;
                 default:
-                    showData(ConsoleApp.INSTRUCTION);
+                    showStandartWarning();
+                    showInstruction(ConsoleApp.INSTRUCTION);
             }
         } while (!closeFlag);
         if (commonFlag) return new ConsoleProgram();

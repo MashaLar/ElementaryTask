@@ -86,9 +86,7 @@ public class Triangle {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getFirstSide(), getSecondSide(), getThirdSide());
+        return Objects.hash(getName());
     }
-
-
 
 }

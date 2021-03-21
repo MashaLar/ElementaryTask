@@ -11,30 +11,49 @@ public class HappyTicketsConsoleProgram extends ConsoleApp
         implements HappyTicketsConsoleProgramConsts {
 
     //constructor
-    public HappyTicketsConsoleProgram(boolean commonFlag) {
-        showData(HappyTicketsConsoleProgramConsts.INSTRUCTION);
-        run(commonFlag);
+    public HappyTicketsConsoleProgram(boolean commonFlag, String... args) {
+        if (args.length == 2) {
+            startHappyTicketConsoleProgram(args);
+        } else run(commonFlag);
     }
 
     private void startHappyTicketConsoleProgram() {
         String[] interval = makeTicketValid(getTicket(INPUT_MIN), getTicket(INPUT_MAX));
         try {
             TicketsList ticketsList = new TicketsList(interval[0], interval[1]);
-            int countHardMethodTickets = ticketsList.countOfHappyTicketsHardMethod();
-            int countOrdinaryMethodTickets = ticketsList.countOfHappyTicketsOrdinaryMethod();
-            int countSimpleMethodTickets = ticketsList.countOfHappyTicketsSimpleMethod();
-            printResultOfHappyCountTickets(countHardMethodTickets, countOrdinaryMethodTickets,
-                    countSimpleMethodTickets);
-        }catch (OutOfRangeOfSizeTicketList e){
-            showData(HappyTicketsConsoleProgramConsts.INSTRUCTION);
+            printResultOfHappyCountTickets(ticketsList.countOfHappyTicketsHardMethod(),
+                    ticketsList.countOfHappyTicketsOrdinaryMethod(),
+                    ticketsList.countOfHappyTicketsSimpleMethod());
+        } catch (OutOfRangeOfSizeTicketList e) {
+            showWarning(e.getMessage());
+            showInstruction(HappyTicketsConsoleProgramConsts.INSTRUCTION);
         }
     }
 
+    private void startHappyTicketConsoleProgram(String... args) {
+        String[] interval = makeTicketValid(
+                StringConverter.stringIgnoreTabsSpaces(StringConverter.stringIgnorePlus(args[0])),
+                StringConverter.stringIgnoreTabsSpaces(StringConverter.stringIgnorePlus(args[1])));
+        if (StringValidator.isPositiveIntegerNumber(interval[0]) &&
+                StringValidator.isPositiveIntegerNumber(interval[1])) {
+            try {
+                TicketsList ticketsList = new TicketsList(interval[0], interval[1]);
+                printResultOfHappyCountTickets(ticketsList.countOfHappyTicketsHardMethod(),
+                        ticketsList.countOfHappyTicketsOrdinaryMethod(),
+                        ticketsList.countOfHappyTicketsSimpleMethod());
+            } catch (OutOfRangeOfSizeTicketList e) {
+                showWarning(e.getMessage());
+                showInstruction(HappyTicketsConsoleProgramConsts.INSTRUCTION);
+            }
+        }
+        else showInstruction(HappyTicketsConsoleProgramConsts.INSTRUCTION);
+    }
+
     private void printResultOfHappyCountTickets(int hardMethod, int ordinaryMethod, int simpleMethod) {
-        showData(getResultOFCompareOfHappyTicketsCount(hardMethod, ordinaryMethod, simpleMethod));
-        showData(HARD_METHOD_COUNT + hardMethod);
-        showData(ORDINARY_METHOD_COUNT + ordinaryMethod);
-        showData(SIMPLE_METHOD_COUNT + simpleMethod);
+        showResult(getResultOFCompareOfHappyTicketsCount(hardMethod, ordinaryMethod, simpleMethod));
+        showResult(HARD_METHOD_COUNT + hardMethod);
+        showResult(ORDINARY_METHOD_COUNT + ordinaryMethod);
+        showResult(SIMPLE_METHOD_COUNT + simpleMethod);
     }
 
     private String[] makeTicketValid(String min, String max) {
@@ -58,6 +77,7 @@ public class HappyTicketsConsoleProgram extends ConsoleApp
                 return result;
             }
             showStandartWarning();
+            showInstruction(HappyTicketsConsoleProgramConsts.INSTRUCTION);
         } while (true);
     }
 
@@ -75,7 +95,8 @@ public class HappyTicketsConsoleProgram extends ConsoleApp
                     closeFlag = close();
                     break;
                 default:
-                    showData(ConsoleApp.INSTRUCTION);
+                    showStandartWarning();
+                    showInstruction(ConsoleApp.INSTRUCTION);
             }
         } while (!closeFlag);
         if (commonFlag) return new ConsoleProgram();
