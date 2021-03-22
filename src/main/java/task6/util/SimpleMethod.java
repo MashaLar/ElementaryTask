@@ -2,10 +2,13 @@ package task6.util;
 
 import task6.model.Ticket;
 
-public class SimpleMethod {
+//enum realisation of singleton
+public enum SimpleMethod implements HappyMethods{
 
-    public static boolean sumOfHalfNums(Ticket ticket) {
-        if (ticket.getTicket().length() % 2 == 0) {
+    INSTANCE;
+
+    public boolean isHappy(Ticket ticket) {
+        if (ticket.getValueTicket().length() % 2 == 0) {
             return sumOfHalfNumForEvenLength(ticket);
         }
         else {

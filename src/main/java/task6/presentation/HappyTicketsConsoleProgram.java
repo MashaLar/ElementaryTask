@@ -6,6 +6,7 @@ import general.models.ConsoleProgram;
 import general.validation.StringValidator;
 import task6.exception.OutOfRangeOfSizeTicketList;
 import task6.model.TicketsList;
+import task6.util.TicketMethods;
 
 public class HappyTicketsConsoleProgram extends ConsoleApp
         implements HappyTicketsConsoleProgramConsts {
@@ -19,15 +20,7 @@ public class HappyTicketsConsoleProgram extends ConsoleApp
 
     private void startHappyTicketConsoleProgram() {
         String[] interval = makeTicketValid(getTicket(INPUT_MIN), getTicket(INPUT_MAX));
-        try {
-            TicketsList ticketsList = new TicketsList(interval[0], interval[1]);
-            printResultOfHappyCountTickets(ticketsList.countOfHappyTicketsHardMethod(),
-                    ticketsList.countOfHappyTicketsOrdinaryMethod(),
-                    ticketsList.countOfHappyTicketsSimpleMethod());
-        } catch (OutOfRangeOfSizeTicketList e) {
-            showWarning(e.getMessage());
-            showInstruction(HappyTicketsConsoleProgramConsts.INSTRUCTION);
-        }
+        bodyOfTicketConsoleProgram(interval);
     }
 
     private void startHappyTicketConsoleProgram(String... args) {
@@ -36,17 +29,21 @@ public class HappyTicketsConsoleProgram extends ConsoleApp
                 StringConverter.stringIgnoreTabsSpaces(StringConverter.stringIgnorePlus(args[1])));
         if (StringValidator.isPositiveIntegerNumber(interval[0]) &&
                 StringValidator.isPositiveIntegerNumber(interval[1])) {
-            try {
-                TicketsList ticketsList = new TicketsList(interval[0], interval[1]);
-                printResultOfHappyCountTickets(ticketsList.countOfHappyTicketsHardMethod(),
-                        ticketsList.countOfHappyTicketsOrdinaryMethod(),
-                        ticketsList.countOfHappyTicketsSimpleMethod());
-            } catch (OutOfRangeOfSizeTicketList e) {
-                showWarning(e.getMessage());
-                showInstruction(HappyTicketsConsoleProgramConsts.INSTRUCTION);
-            }
+            bodyOfTicketConsoleProgram(interval);
         }
         else showInstruction(HappyTicketsConsoleProgramConsts.INSTRUCTION);
+    }
+
+    private void bodyOfTicketConsoleProgram(String[] interval) {
+        try {
+            TicketsList ticketsList = new TicketsList(interval[0], interval[1]);
+            printResultOfHappyCountTickets(ticketsList.countOfHappyTickets(TicketMethods.HARD_METHOD),
+                    ticketsList.countOfHappyTickets(TicketMethods.ORDINARY_METHOD),
+                    ticketsList.countOfHappyTickets(TicketMethods.SIMPLE_METHOD));
+        } catch (OutOfRangeOfSizeTicketList e) {
+            showWarning(e.getMessage());
+            showInstruction(HappyTicketsConsoleProgramConsts.INSTRUCTION);
+        }
     }
 
     private void printResultOfHappyCountTickets(int hardMethod, int ordinaryMethod, int simpleMethod) {

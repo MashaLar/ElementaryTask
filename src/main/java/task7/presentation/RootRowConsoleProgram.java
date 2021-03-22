@@ -32,7 +32,7 @@ public class RootRowConsoleProgram extends ConsoleApp {
     public void startRootRowConsoleProgram() {
         int count = getCount();
         int square = getSquare();
-        showResult(RootRow.findElements(count, square).toString());
+        showResult("\nSequence: "+RootRow.findElements(count, square).toString());
     }
 
     public void startRootRowConsoleProgram(String... args) {

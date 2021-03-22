@@ -1,9 +1,13 @@
 package task6.util;
 import task6.model.Ticket;
 
-public class OrdinaryMethod {
+//enum realisation of singleton
+public enum OrdinaryMethod implements HappyMethods{
 
-    public static boolean sumOfPositionEvenOddNums(Ticket ticket) {
+    INSTANCE;
+
+    @Override
+    public boolean isHappy(Ticket ticket) {
         int[] numbers = ticket.getIntArrayFromString();
         int[] sum = {0, 0};
         for (int i = 0; i < numbers.length; i++) {

@@ -6,24 +6,24 @@ import java.util.stream.Stream;
 
 public class Ticket implements Comparable<Ticket>{
 
-    private String ticket;
+    private String valueTicket;
 
-    public Ticket(String ticket){
-        this.ticket = ticket;
+    public Ticket(String valueTicket){
+        this.valueTicket = valueTicket;
     }
 
-    public String getTicket(){
-        return ticket;
+    public String getValueTicket(){
+        return valueTicket;
     }
 
     public int[] getIntArrayFromString(){
-        return Stream.of(ticket.split(""))
+        return Stream.of(valueTicket.split(""))
                 .mapToInt(Integer::parseInt).toArray();
     }
 
     public String addNumToTicket(String number){
-        int oldLength = ticket.length();
-        String newTicket = new BigInteger(ticket).add(new BigInteger(number)).toString();
+        int oldLength = valueTicket.length();
+        String newTicket = new BigInteger(valueTicket).add(new BigInteger(number)).toString();
         while(oldLength != newTicket.length() ){
             newTicket = "0"+newTicket;
         }
@@ -31,7 +31,7 @@ public class Ticket implements Comparable<Ticket>{
     }
 
     public BigInteger subNumToTicket(String number){
-        return new BigInteger(ticket).subtract(new BigInteger(number));
+        return new BigInteger(valueTicket).subtract(new BigInteger(number));
     }
 
     @Override
@@ -41,17 +41,17 @@ public class Ticket implements Comparable<Ticket>{
         if (!(o instanceof Ticket))
             return false;
         Ticket ticket1 = (Ticket) o;
-        return ticket.equals(ticket1.ticket);
+        return valueTicket.equals(ticket1.valueTicket);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ticket);
+        return Objects.hash(valueTicket);
     }
 
     @Override
     public int compareTo(Ticket o) {
-        return new BigInteger(ticket).compareTo(new BigInteger(o.ticket));
+        return new BigInteger(valueTicket).compareTo(new BigInteger(o.valueTicket));
     }
 
 

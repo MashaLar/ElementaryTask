@@ -5,8 +5,8 @@ import task1.model.Chessboard;
 public class ConsoleChessboard {
 
     //symbols for squares
-    final private char white= '\u25A0'; // symbol of white square
-    final private char black= '\u25A1'; // symbol of black square
+    final private char white= ' '; // symbol of white square ■ - '\u25A0'
+    final private char black= '*'; // symbol of black square □ - '\u25A1'
 
     private Chessboard chessboard;
 

@@ -42,7 +42,7 @@ public class FibonacciSequenceConsoleProgram extends ConsoleApp {
             FibonacciSequence fibonacciSequence = new FibonacciSequence();
             fibonacciSequence.calculateFibonacciNumberByLength(length);
             fibonacciSequence.getFibonacci().removeIf(s -> s.length() != length);
-            showResult(fibonacciSequence.getFibonacci().toString());
+            showResult("\nSequence:"+fibonacciSequence.getFibonacci().toString());
         } else{
             showStandartWarning();
             showInstruction(INSTRUCTION);
@@ -57,7 +57,7 @@ public class FibonacciSequenceConsoleProgram extends ConsoleApp {
             fibonacciSequence.calculateFibonacciNumberToMax(new BigInteger(max));
             fibonacciSequence.getFibonacci()
                     .removeIf(s -> new BigInteger(s).compareTo(new BigInteger(min)) == -1);
-            showData(fibonacciSequence.getFibonacci().toString());
+            showResult("\nSequence:"+fibonacciSequence.getFibonacci().toString());
         }
         else {
             showStandartWarning();

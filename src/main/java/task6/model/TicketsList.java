@@ -1,9 +1,7 @@
 package task6.model;
 
 import task6.exception.OutOfRangeOfSizeTicketList;
-import task6.util.HardMethod;
-import task6.util.OrdinaryMethod;
-import task6.util.SimpleMethod;
+import task6.util.*;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -25,30 +23,10 @@ public class TicketsList {
         return tickets;
     }
 
-    public int countOfHappyTicketsHardMethod(){
+    public int countOfHappyTickets(TicketMethods ticketMethods){
         int count = 0;
         for (Ticket ticket : tickets) {
-            if(HardMethod.sumOfEvenOddNums(ticket)){
-                count++;
-            }
-        }
-        return count;
-    }
-
-    public int countOfHappyTicketsOrdinaryMethod(){
-        int count = 0;
-        for (Ticket ticket : tickets) {
-            if(OrdinaryMethod.sumOfPositionEvenOddNums(ticket)){
-                count++;
-            }
-        }
-        return count;
-    }
-
-    public int countOfHappyTicketsSimpleMethod(){
-        int count = 0;
-        for (Ticket ticket : tickets) {
-            if(SimpleMethod.sumOfHalfNums(ticket)){
+            if(ticketMethods.isHappy(ticket)){
                 count++;
             }
         }
@@ -71,7 +49,7 @@ public class TicketsList {
     }
 
     private boolean checkSizeOfInterval(Ticket first, Ticket second){
-        return first.subNumToTicket(second.getTicket()).abs()
+        return first.subNumToTicket(second.getValueTicket()).abs()
                 .compareTo(BigInteger.valueOf(100000))!=1;
     }
 }

@@ -57,7 +57,7 @@ public class TriangleConsoleProgram extends ConsoleApp implements TriangleConsol
                 return result;
             }
             showStandartWarning();
-            showInstruction(ConsoleApp.INSTRUCTION);
+            showInstruction(TriangleConsoleProgramStringConstants.INSTRUCTION);
         } while (true);
     }
 

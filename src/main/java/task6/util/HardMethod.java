@@ -1,11 +1,14 @@
 package task6.util;
 
-
 import task6.model.Ticket;
 
-public class HardMethod {
+//enum realisation of singleton
+public enum HardMethod implements HappyMethods {
 
-    public static boolean sumOfEvenOddNums(Ticket ticket){
+    INSTANCE;
+
+    //sum of odd numbers equals sum of even numbers
+    public boolean isHappy(Ticket ticket){
         int[] sum = {0,0};
         int[] numbers = ticket.getIntArrayFromString();
         for (int number : numbers) {
@@ -16,4 +19,5 @@ public class HardMethod {
         }
         return sum[0] == sum[1];
     }
+
 }

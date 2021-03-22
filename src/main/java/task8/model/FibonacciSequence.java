@@ -10,7 +10,7 @@ import java.util.List;
 public class FibonacciSequence {
 
     //list for sequence
-    List<String> fibonacci;
+    private List<String> fibonacci;
 
     //constructor
     public FibonacciSequence(){ }
@@ -31,7 +31,7 @@ public class FibonacciSequence {
         fibonacci.add(S);
     }
 
-    //Fibonacci sequence by length of numbers
+    //Fibonacci sequence by length of numbers 
     public void calculateFibonacciNumberByLength(int lengthOfNumber) {
         fibonacci = new ArrayList<>(Arrays.asList("0", "1"));
         while (fibonacci.get(fibonacci.size()-1).length()<=lengthOfNumber){
