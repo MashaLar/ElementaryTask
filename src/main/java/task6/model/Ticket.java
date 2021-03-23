@@ -1,5 +1,9 @@
 package task6.model;
 
+import general.converter.StringConverter;
+import general.validation.StringValidator;
+import task6.exception.NotNumericTicket;
+
 import java.math.BigInteger;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -9,6 +13,9 @@ public class Ticket implements Comparable<Ticket>{
     private String valueTicket;
 
     public Ticket(String valueTicket){
+        if(!StringValidator.isPositiveIntegerNumber(valueTicket)) {
+            throw new NotNumericTicket();
+        }
         this.valueTicket = valueTicket;
     }
 
@@ -23,14 +30,26 @@ public class Ticket implements Comparable<Ticket>{
 
     public String addNumToTicket(String number){
         int oldLength = valueTicket.length();
-        String newTicket = new BigInteger(valueTicket).add(new BigInteger(number)).toString();
+        String newTicket = new BigInteger(valueTicket).add(new BigInteger(
+                        StringConverter.stringIgnoreSign(number))).toString();
         while(oldLength != newTicket.length() ){
             newTicket = "0"+newTicket;
         }
         return newTicket;
     }
 
-    public BigInteger subNumToTicket(String number){
+    public String subNumToTicket(String number){
+        int oldLength = valueTicket.length();
+        String newTicket = new BigInteger(valueTicket).subtract(new BigInteger(
+                StringConverter.stringIgnoreSign(number))).toString();
+        while(oldLength != newTicket.length() ){
+            newTicket = "0"+newTicket;
+        }
+        if(StringValidator.isPositiveIntegerNumber(newTicket))return newTicket;
+        return null;
+    }
+
+    public BigInteger differenceBetweenTickets(String number){
         return new BigInteger(valueTicket).subtract(new BigInteger(number));
     }
 

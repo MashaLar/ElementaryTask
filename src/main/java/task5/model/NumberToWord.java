@@ -22,24 +22,34 @@ public class NumberToWord implements NumberWordsArray {
 
     private void translate() {
         if ((number.matches("0+"))) {
+            number = "0";
             result.add(ZERO);
             return;
         }
-        if ((number.matches("-.*"))) {
+        replaceZeroOnStart();
+        String newNumber = number;
+        if ((number.matches("-\\d*"))) {
             result.add(MINUS);
-            number = number.substring(1);
+            newNumber = number.substring(1);
         }
         String[] num = divideNumber(StringConverter
-                .stringIgnoreTabsSpaces(number));
+                .stringIgnoreTabsSpaces(newNumber));
         for (int i = num.length - 1; i >= 0; i--) {
             translateToWord(num[i]);
             if (i >= 1) {
                 if (i + 3 == 4) {
-                    HundredsUniqueNums
-                            .changeNumToHundredUnique(result);
+                    result.add(HundredsUniqueNums
+                            .changeNumToHundredUnique(result));
+                    result.remove(result.size()-2);
                 }
                 result.add(EndNumberWord.endWordAdd(num[i], i));
             }
+        }
+    }
+
+    private void replaceZeroOnStart(){
+        if (number.matches("0+[1-9]+")) {
+            number = number.replaceAll("0","");
         }
     }
 

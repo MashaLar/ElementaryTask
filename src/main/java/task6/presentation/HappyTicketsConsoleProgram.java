@@ -25,8 +25,8 @@ public class HappyTicketsConsoleProgram extends ConsoleApp
 
     private void startHappyTicketConsoleProgram(String... args) {
         String[] interval = makeTicketValid(
-                StringConverter.stringIgnoreTabsSpaces(StringConverter.stringIgnorePlus(args[0])),
-                StringConverter.stringIgnoreTabsSpaces(StringConverter.stringIgnorePlus(args[1])));
+                StringConverter.stringIgnoreTabsSpaces(StringConverter.stringIgnoreSign(args[0])),
+                StringConverter.stringIgnoreTabsSpaces(StringConverter.stringIgnoreSign(args[1])));
         if (StringValidator.isPositiveIntegerNumber(interval[0]) &&
                 StringValidator.isPositiveIntegerNumber(interval[1])) {
             bodyOfTicketConsoleProgram(interval);

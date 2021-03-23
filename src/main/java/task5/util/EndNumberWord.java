@@ -6,7 +6,7 @@ public class EndNumberWord implements NumberWordsArray {
     private EndNumberWord(){};
 
     public static String endWordAdd(String S, int row){
-        int lastSymbol = Integer.parseInt(""+S.substring((S.length()-1)));
+        int lastSymbol = Integer.parseInt(S.substring((S.length()-1)));
         int twoLastSymbols = 0;
         if(S.length()>=2) {
             twoLastSymbols = Integer.parseInt(S.substring((S.length()-2)));

@@ -15,8 +15,8 @@ public class StringConverter {
     public static String stringIgnoreRegisterLow(String S){
         return S.toLowerCase();
     }
-    public static String stringIgnorePlus(String S){
-        return S.replaceAll("\\+", "");
+    public static String stringIgnoreSign(String S){
+        return S.replaceAll("[\\+\\-]", "");
     }
     public static String stringIgnoreTabsSpaces(String S){
         return S.replaceAll("[.,;\\s\t]+", "");

@@ -10,29 +10,29 @@ import java.util.List;
 public class FibonacciSequence {
 
     //list for sequence
-    private List<String> fibonacci;
+    private static List<String> fibonacci;
 
     //constructor
-    public FibonacciSequence(){ }
+    private FibonacciSequence(){ }
 
     //getter for list
-    public List<String> getFibonacci() {
+    public static List<String> getFibonacci() {
         return fibonacci;
     }
 
     //calculating one number fibonacci and add to array
-    private String calculateFibonacciNumber(){
+    private static String calculateFibonacciNumber(){
         BigInteger temp = new BigInteger(fibonacci.get(fibonacci.size()-1));
         return temp.add(new BigInteger(fibonacci.get(fibonacci.size()-2))).toString();
     }
 
     //method for adding num to list
-    private void addFibonacciNumber(String S){
+    private static void addFibonacciNumber(String S){
         fibonacci.add(S);
     }
 
-    //Fibonacci sequence by length of numbers 
-    public void calculateFibonacciNumberByLength(int lengthOfNumber) {
+    //Fibonacci sequence by length of numbers
+    public static void calculateFibonacciNumberByLength(int lengthOfNumber) {
         fibonacci = new ArrayList<>(Arrays.asList("0", "1"));
         while (fibonacci.get(fibonacci.size()-1).length()<=lengthOfNumber){
             addFibonacciNumber(calculateFibonacciNumber());
@@ -40,7 +40,7 @@ public class FibonacciSequence {
     }
 
     //Fibonacci sequence to max value
-    public void calculateFibonacciNumberToMax(BigInteger max) {
+    public static void calculateFibonacciNumberToMax(BigInteger max) {
         fibonacci =  new ArrayList<>(Arrays.asList("0", "1"));
         while (max.compareTo(new BigInteger(fibonacci.get(fibonacci.size()-1)))>=0){
             addFibonacciNumber(calculateFibonacciNumber());

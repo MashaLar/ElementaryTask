@@ -36,20 +36,20 @@ public class TicketsList {
     private Ticket getEndTicket(String start, String end){
         Ticket firstTicket = new Ticket(start);
         Ticket secondTicket = new Ticket(end);
-        if(checkSizeOfInterval(firstTicket,secondTicket)) {
-            if (firstTicket.compareTo(secondTicket) != -1) {
-                tickets.add(secondTicket);
-                return firstTicket;
-            } else {
-                tickets.add(firstTicket);
-                return secondTicket;
-            }
+        if(!checkSizeOfInterval(firstTicket,secondTicket)) {
+            throw new OutOfRangeOfSizeTicketList();
         }
-        else throw new OutOfRangeOfSizeTicketList();
+        if (firstTicket.compareTo(secondTicket) != -1) {
+            tickets.add(secondTicket);
+            return firstTicket;
+        } else {
+            tickets.add(firstTicket);
+            return secondTicket;
+        }
     }
 
     private boolean checkSizeOfInterval(Ticket first, Ticket second){
-        return first.subNumToTicket(second.getValueTicket()).abs()
+        return first.differenceBetweenTickets(second.getValueTicket()).abs()
                 .compareTo(BigInteger.valueOf(100000))!=1;
     }
 }

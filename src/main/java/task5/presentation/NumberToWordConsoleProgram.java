@@ -46,7 +46,7 @@ public class NumberToWordConsoleProgram extends ConsoleApp {
 
     private String getNumber() {
         do {
-            String number = StringConverter.stringIgnorePlus(inputDataFiltered(INPUT_NUMBER));
+            String number = StringConverter.stringIgnoreSign(inputDataFiltered(INPUT_NUMBER));
             if (StringValidator.isIntegerNumber(number)) {
                 return number;
             } else{

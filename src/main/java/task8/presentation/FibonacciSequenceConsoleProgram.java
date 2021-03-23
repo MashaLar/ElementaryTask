@@ -39,10 +39,9 @@ public class FibonacciSequenceConsoleProgram extends ConsoleApp {
     private void startFibonacciSequenceLength() {
         int length = StringConverter.stringToInt(inputDataFiltered(LENGTH_NUM));
         if (checkNumbersLength(length)) {
-            FibonacciSequence fibonacciSequence = new FibonacciSequence();
-            fibonacciSequence.calculateFibonacciNumberByLength(length);
-            fibonacciSequence.getFibonacci().removeIf(s -> s.length() != length);
-            showResult("\nSequence:"+fibonacciSequence.getFibonacci().toString());
+            FibonacciSequence.calculateFibonacciNumberByLength(length);
+            FibonacciSequence.getFibonacci().removeIf(s -> s.length() != length);
+            showResult("\nSequence:"+FibonacciSequence.getFibonacci().toString());
         } else{
             showStandartWarning();
             showInstruction(INSTRUCTION);
@@ -53,11 +52,10 @@ public class FibonacciSequenceConsoleProgram extends ConsoleApp {
         String min = getBigInteger(MIN_VALUE);
         String max = getBigInteger(MAX_VALUE);
         if (checkNumbersIntervalNumber(min) && checkNumbersIntervalNumber(max)) {
-            FibonacciSequence fibonacciSequence = new FibonacciSequence();
-            fibonacciSequence.calculateFibonacciNumberToMax(new BigInteger(max));
-            fibonacciSequence.getFibonacci()
+            FibonacciSequence.calculateFibonacciNumberToMax(new BigInteger(max));
+            FibonacciSequence.getFibonacci()
                     .removeIf(s -> new BigInteger(s).compareTo(new BigInteger(min)) == -1);
-            showResult("\nSequence:"+fibonacciSequence.getFibonacci().toString());
+            showResult("\nSequence:"+FibonacciSequence.getFibonacci().toString());
         }
         else {
             showStandartWarning();
